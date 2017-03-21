@@ -1,6 +1,6 @@
 package com.nunez.bookito.searchBooks;
 
-import com.nunez.bookito.models.Book;
+import com.nunez.bookito.entities.BookWrapper;
 
 import java.util.ArrayList;
 
@@ -10,21 +10,21 @@ import java.util.ArrayList;
 
 public class SearchPresenter implements SearchBooksContract.Presenter {
 
-  private SearchBooksContract.View view;
-  private SearchBooksContract.Repository repository;
+  private SearchBooksContract.View       view;
+  private SearchBooksContract.Interactor interactor;
 
-  public SearchPresenter(SearchBooksContract.View view, SearchBooksContract.Repository repository) {
+  public SearchPresenter(SearchBooksContract.View view, SearchBooksContract.Interactor interactor) {
     this.view = view;
-    this.repository = repository;
+    this.interactor = interactor;
+    this.interactor.setPresenter(this);
   }
-
 
   @Override
   public void searchBooks(String bookTitle) {
     if (!bookTitle.isEmpty()) {
       view.showLoading();
       try {
-        repository.searchBooks(bookTitle);
+        interactor.searchBooks(bookTitle);
       } catch (RuntimeException e) {
         view.hideLoading();
         view.displayError();
@@ -33,7 +33,7 @@ public class SearchPresenter implements SearchBooksContract.Presenter {
   }
 
   @Override
-  public void loadBooks(ArrayList<Book> books) {
+  public void loadBooks(ArrayList<BookWrapper> books) {
     view.hideLoading();
 
     if(books == null){

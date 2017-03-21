@@ -5,11 +5,20 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
-public class ScrollingActivity extends AppCompatActivity {
+import com.nunez.bookito.entities.BookWrapper;
+import com.nunez.bookito.searchBooks.SearchBooksContract;
+import com.nunez.bookito.searchBooks.SearchInteractor;
+import com.nunez.bookito.searchBooks.SearchPresenter;
+
+import java.util.ArrayList;
+
+public class ScrollingActivity extends AppCompatActivity implements SearchBooksContract.View{
+  private static final String TAG = "ScrollingActivity";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +28,17 @@ public class ScrollingActivity extends AppCompatActivity {
     setSupportActionBar(toolbar);
 
     FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+    SearchInteractor searchInteractor = new SearchInteractor(getApplication());
+    final SearchPresenter presenter = new SearchPresenter(this,searchInteractor);
+
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+        Snackbar.make(view, "Searching books", Snackbar.LENGTH_LONG)
             .setAction("Action", null).show();
+
+        presenter.searchBooks("dracula");
       }
     });
   }
@@ -47,5 +62,30 @@ public class ScrollingActivity extends AppCompatActivity {
       return true;
     }
     return super.onOptionsItemSelected(item);
+  }
+
+  @Override
+  public void showBooks(ArrayList<BookWrapper> booksArray) {
+    Log.d(TAG, "showBooks() called with: booksArray = [" + booksArray + "]");
+  }
+
+  @Override
+  public void showNoBooksFound() {
+    Log.d(TAG, "showNoBooksFound() called");
+  }
+
+  @Override
+  public void displayError() {
+    Log.d(TAG, "displayError() called");
+  }
+
+  @Override
+  public void showLoading() {
+    Log.d(TAG, "showLoading() called");
+  }
+
+  @Override
+  public void hideLoading() {
+    Log.d(TAG, "hideLoading() called");
   }
 }

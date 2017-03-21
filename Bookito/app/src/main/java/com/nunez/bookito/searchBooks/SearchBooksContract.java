@@ -1,6 +1,6 @@
 package com.nunez.bookito.searchBooks;
 
-import com.nunez.bookito.models.Book;
+import com.nunez.bookito.entities.BookWrapper;
 
 import java.util.ArrayList;
 
@@ -11,20 +11,20 @@ import java.util.ArrayList;
 public interface SearchBooksContract {
   interface Presenter {
     void searchBooks(String bookTitle);
-    void loadBooks(ArrayList<Book> books);
+    void loadBooks(ArrayList<BookWrapper> books);
   }
 
   interface View{
-    void showBooks(ArrayList<Book> booksArray);
+    void showBooks(ArrayList<BookWrapper> booksArray);
     void showNoBooksFound();
     void displayError();
-
     void showLoading();
-
     void hideLoading();
   }
 
-  interface Repository{
-    ArrayList<Book> searchBooks(String bookTitle);
+  interface Interactor {
+    void searchBooks(String bookTitle);
+    void setPresenter(SearchPresenter presenter);
+    void sendBooksToPresenter(ArrayList<BookWrapper> books);
   }
 }
