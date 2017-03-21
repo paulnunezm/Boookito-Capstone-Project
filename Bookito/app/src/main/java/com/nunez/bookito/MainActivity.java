@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    setContentView(R.layout.main_activity);
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-      View     rootView = inflater.inflate(R.layout.fragment_main, container, false);
+      View     rootView = inflater.inflate(R.layout.main_activity_fragment, container, false);
       TextView textView = (TextView) rootView.findViewById(R.id.section_label);
       textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
       return rootView;
