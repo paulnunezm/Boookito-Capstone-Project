@@ -20,7 +20,7 @@ android {
         }
 
         buildTypes.each {
-            it.buildConfigField 'String', 'GoodreadsApiKey', project.GOODREADS_API_KEY
+            //it.buildConfigField 'String', 'GoodreadsApiKey', project.GOODREADS_API_KEY
         }
     }
 }
