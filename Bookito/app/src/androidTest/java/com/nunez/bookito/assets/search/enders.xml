@@ -1,0 +1,48 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<GoodreadsResponse>
+    <Request>
+        <authentication>true</authentication>
+        <key>
+            <![CDATA[ 9kdgMNGvbCA4Odn3u9f72g ]]>
+        </key>
+        <method>
+            <![CDATA[ search_index ]]>
+        </method>
+    </Request>
+    <search>
+        <query>
+            <![CDATA[ Ender's Game ]]>
+        </query>
+        <results-start>1</results-start>
+        <results-end>20</results-end>
+        <total-results>508</total-results>
+        <source>Goodreads</source>
+        <query-time-seconds>0.19</query-time-seconds>
+        <results>
+            <work>
+                <id type="integer">2422333</id>
+                <books_count type="integer">217</books_count>
+                <ratings_count type="integer">840154</ratings_count>
+                <text_reviews_count type="integer">37227</text_reviews_count>
+                <original_publication_year type="integer">1985</original_publication_year>
+                <original_publication_month type="integer" nil="true"/>
+                <original_publication_day type="integer" nil="true"/>
+                <average_rating>4.29</average_rating>
+                <best_book type="Book">
+                    <id type="integer">375802</id>
+                    <title>Ender's Game (Ender's Saga, #1)</title>
+                    <author>
+                        <id type="integer">589</id>
+                        <name>Orson Scott Card</name>
+                    </author>
+                    <image_url>
+                        https://images.gr-assets.com/books/1408303130m/375802.jpg
+                    </image_url>
+                    <small_image_url>
+                        https://images.gr-assets.com/books/1408303130s/375802.jpg
+                    </small_image_url>
+                </best_book>
+            </work>
+        </results>
+    </search>
+</GoodreadsResponse>
