@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        //TODO: will open the search ativity with circular reveal and transform animation.
         Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
             .setAction("Action", null).show();
       }
@@ -143,18 +144,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public int getCount() {
       // Show 3 total pages.
-      return 3;
+      return 2;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
       switch (position) {
         case 0:
-          return "SECTION 1";
+          return getString(R.string.main_activity_wishlist);
         case 1:
-          return "SECTION 2";
-        case 2:
-          return "SECTION 3";
+          return getString(R.string.main_activity_my_books);
       }
       return null;
     }
