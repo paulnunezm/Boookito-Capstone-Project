@@ -20,35 +20,39 @@ android {
         }
 
         buildTypes.each {
-            //it.buildConfigField 'String', 'GoodreadsApiKey', project.GOODREADS_API_KEY
+            it.buildConfigField 'String', 'GoodreadsApiKey', project.GOODREADS_API_KEY
         }
     }
 }
 
-configurations {
-    compile.exclude group: 'stax'
-    compile.exclude group: 'xpp3'
-}
+//configurations {
+//    compile.exclude group: 'stax'
+//    compile.exclude group: 'xpp3'
+//}
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     // support
-    compile 'com.android.support:appcompat-v7:25.1.1'
-    compile 'com.android.support:design:25.1.1'
+    
 
     // retrofit
-    compile 'com.squareup.retrofit2:retrofit:2.2.0'
-    compile 'com.squareup.retrofit2:converter-simplexml:2.2.0',{
-        exclude group: 'xpp3'
+    compile ('com.squareup.retrofit2:converter-simplexml:2.2.0'){
+        exclude module: 'stax-api'
+        exclude module: 'stax'
+        exclude module: 'xpp3'
     }
 
     // test
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:2.7.17'
-
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
-    androidTestCompile 'com.android.support:support-annotations:25.1.1'
-    androidTestCompile ('com.github.andrzejchm.RESTMock:android:0.2.1',{
+    androidTestCompile ('com.github.andrzejchm.RESTMock:android:0.2.1', {
         exclude group: 'com.squareup.okhttp3'
     })
+
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:design:25.1.1'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:2.7.17'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    androidTestCompile 'com.android.support:support-annotations:25.1.1'
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
  */
 
 public class SearchPresenter implements SearchBooksContract.Presenter {
+  private static final String TAG = "SearchPresenter";
 
   private SearchBooksContract.View       view;
   private SearchBooksContract.Interactor interactor;
@@ -26,6 +27,10 @@ public class SearchPresenter implements SearchBooksContract.Presenter {
       try {
         interactor.searchBooks(bookTitle);
       } catch (RuntimeException e) {
+        view.hideLoading();
+        view.displayError();
+      } catch (Exception e) {
+        e.printStackTrace();
         view.hideLoading();
         view.displayError();
       }

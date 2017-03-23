@@ -20,10 +20,11 @@ public interface SearchBooksContract {
     void displayError();
     void showLoading();
     void hideLoading();
+    void onSearchTextChange(String text);
   }
 
   interface Interactor {
-    void searchBooks(String bookTitle);
+    void searchBooks(String bookTitle) throws Exception;
     void setPresenter(SearchPresenter presenter);
     void sendBooksToPresenter(ArrayList<BookWrapper> books);
   }
