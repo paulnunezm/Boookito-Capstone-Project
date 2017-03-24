@@ -9,7 +9,7 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
-        android:layout_height="205dp"
+        android:layout_height="190dp"
         android:layout_marginTop="25dp"
         app:cardCornerRadius="4dp"
         android:elevation="2dp">
@@ -24,16 +24,16 @@
             android:paddingRight="12dp" >
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/txt_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 tools:text="Ensayo sobre la ceguera"/>
 
             <TextView
-                android:id="@+id/author"
+                android:id="@+id/txt_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -43,27 +43,20 @@
 
             <android.support.v7.widget.AppCompatRatingBar
                 style="@style/BookitoStarts"
+                android:id="@+id/rating_stars"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:isIndicator="true"
                 android:numStars="5"
                 android:stepSize="0.1"
                 tools:rating="4.07"/>
-
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="5"
-                android:textSize="12sp"
-                tools:text="Una ceguera blanca se expande de manera fulminante. Internados en cuarentena o perdidos por la ciudad, los ciegos deben enfrentarse a lo más primitivo de la especie humana: la voluntad de sobrevivir a cualquier precio. José Saramago, Premio Nobel de Literatura 1998, teje una aterradora parábola acerca del ser humano, que encierra lo más sublime y miserable de nosotros mismos.'Hay novelas que después de leídas continuarán iluminando túneles en la conciencia, abriendo puertas de habitaciones a las que no nos habíamos asomado pese a estar dentro de nosotros.'"/>
         </LinearLayout>
 
         <android.support.v7.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
+            android:layout_marginTop="35dp"
             android:background="@android:color/transparent"
             android:text="@string/search_activity_item_action"
             android:textSize="14sp"/>
@@ -71,7 +64,7 @@
 
 
     <ImageView
-        android:id="@+id/cover"
+        android:id="@+id/img_cover"
         android:layout_width="140dp"
         android:layout_height="180dp"
         android:background="@color/dark_grey"

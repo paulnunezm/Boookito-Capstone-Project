@@ -1,12 +1,15 @@
 package com.nunez.bookito.searchBooks;
 
 import android.os.Bundle;
-import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 
 import com.nunez.bookito.R;
 import com.nunez.bookito.customViews.BookTextWatcher;
@@ -17,12 +20,13 @@ import java.util.ArrayList;
 public class SearchActivity extends AppCompatActivity implements SearchBooksContract.View {
   private static final String TAG = "SearchActivity";
 
-  private BookTextWatcher  mTextWatcher;
-  private SearchPresenter  presenter;
-  private SearchInteractor interactor;
-  private ContentLoadingProgressBar progressBar;
-  private TextView testText;
-
+  private BookTextWatcher   mTextWatcher;
+  private SearchPresenter   presenter;
+  private SearchInteractor  interactor;
+  private ProgressBar       progress;
+  private RecyclerView      recyclerView;
+  private GridLayoutManager gridLayoutManager;
+  private SearchAdapter     adapter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -34,24 +38,31 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     EditText editText = (EditText) findViewById(R.id.editText);
-    progressBar = (ContentLoadingProgressBar) findViewById(R.id.progressBar);
-    testText = (TextView) findViewById(R.id.testText);
+    progress = (ProgressBar) findViewById(R.id.progress);
+    recyclerView = (RecyclerView) findViewById(R.id.recycler);
 
+    int gridColumns =  getResources().getInteger(R.integer.search_activity_columns);
+    gridLayoutManager = new GridLayoutManager(this,
+        gridColumns,
+        LinearLayoutManager.VERTICAL,
+        false);
     mTextWatcher = new BookTextWatcher(this);
     interactor = new SearchInteractor(getApplication());
     presenter = new SearchPresenter(this, interactor);
 
     editText.addTextChangedListener(mTextWatcher);
-
+    recyclerView.setLayoutManager(gridLayoutManager);
+    recyclerView.setHasFixedSize(true);
   }
 
   @Override
   public void showBooks(ArrayList<BookWrapper> booksArray) {
-    Log.d(TAG, "showBooks: ");
-    for (BookWrapper bookWrapper: booksArray) {
-        testText.append("\n"+ bookWrapper.getBook().getTitle());
-      Log.i(TAG, "showBooks: "+bookWrapper.getBook().getTitle());
-    }
+    Log.d(TAG, "showBooks() called with: booksArray = [" + booksArray + "]");
+    adapter = new SearchAdapter(booksArray);
+    recyclerView.setAdapter(adapter);
+
+    adapter.notifyDataSetChanged();
+
   }
 
   @Override
@@ -66,12 +77,12 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
 
   @Override
   public void showLoading() {
-    progressBar.show();
+    progress.setVisibility(View.VISIBLE);
   }
 
   @Override
   public void hideLoading() {
-    progressBar.hide();
+    progress.setVisibility(View.GONE);
   }
 
 
@@ -83,7 +94,6 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
    */
   @Override
   public void onSearchTextChange(String text) {
-    testText.setText("");
     presenter.searchBooks(text);
   }
 }
