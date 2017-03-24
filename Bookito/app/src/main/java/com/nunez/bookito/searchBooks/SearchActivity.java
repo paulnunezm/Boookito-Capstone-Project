@@ -77,11 +77,13 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
 
   @Override
   public void showLoading() {
+    recyclerView.setVisibility(View.GONE);
     progress.setVisibility(View.VISIBLE);
   }
 
   @Override
   public void hideLoading() {
+    recyclerView.setVisibility(View.VISIBLE);
     progress.setVisibility(View.GONE);
   }
 

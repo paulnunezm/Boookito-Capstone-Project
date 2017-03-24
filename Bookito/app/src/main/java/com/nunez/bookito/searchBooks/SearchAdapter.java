@@ -74,7 +74,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
 
       Book book = item.getBook();
       title.setText(book.getTitle());
-      author.setText(book.getAuthor().getName());
+      author.setText(item.getBook().getAuthor().getName());
       rating.setRating(Float.parseFloat(item.getAverageRating()));
 
       Picasso.with(context).load(book.getImageUrl()).fit().into(cover);
