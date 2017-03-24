@@ -6,7 +6,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.nunez.bookito"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -52,6 +52,7 @@ dependencies {
 
     // firebase
     compile 'com.google.firebase:firebase-auth:10.0.1'
+    compile 'com.firebaseui:firebase-ui-auth:1.2.0'
 
     // test
     testCompile 'junit:junit:4.12'
