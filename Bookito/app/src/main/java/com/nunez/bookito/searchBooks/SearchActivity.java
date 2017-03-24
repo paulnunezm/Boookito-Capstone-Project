@@ -17,16 +17,20 @@ import com.nunez.bookito.entities.BookWrapper;
 
 import java.util.ArrayList;
 
-public class SearchActivity extends AppCompatActivity implements SearchBooksContract.View {
+public class SearchActivity extends AppCompatActivity implements SearchBooksContract.View,
+    SearchAdapter.SearchViewHolder.SearchBookListener, AddToModalBottomSheet.OnItemSelectedListener {
+
   private static final String TAG = "SearchActivity";
 
-  private BookTextWatcher   mTextWatcher;
-  private SearchPresenter   presenter;
-  private SearchInteractor  interactor;
-  private ProgressBar       progress;
-  private RecyclerView      recyclerView;
-  private GridLayoutManager gridLayoutManager;
-  private SearchAdapter     adapter;
+  private BookTextWatcher       mTextWatcher;
+  private SearchPresenter       presenter;
+  private SearchInteractor      interactor;
+  private ProgressBar           progress;
+  private RecyclerView          recyclerView;
+  private GridLayoutManager     gridLayoutManager;
+  private SearchAdapter         adapter;
+  private AddToModalBottomSheet modalBottomSheet;
+  private BookWrapper           selectedBook;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +45,7 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
     progress = (ProgressBar) findViewById(R.id.progress);
     recyclerView = (RecyclerView) findViewById(R.id.recycler);
 
-    int gridColumns =  getResources().getInteger(R.integer.search_activity_columns);
+    int gridColumns = getResources().getInteger(R.integer.search_activity_columns);
     gridLayoutManager = new GridLayoutManager(this,
         gridColumns,
         LinearLayoutManager.VERTICAL,
@@ -57,8 +61,7 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
 
   @Override
   public void showBooks(ArrayList<BookWrapper> booksArray) {
-    Log.d(TAG, "showBooks() called with: booksArray = [" + booksArray + "]");
-    adapter = new SearchAdapter(booksArray);
+    adapter = new SearchAdapter(booksArray, this);
     recyclerView.setAdapter(adapter);
 
     adapter.notifyDataSetChanged();
@@ -97,5 +100,22 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
   @Override
   public void onSearchTextChange(String text) {
     presenter.searchBooks(text);
+  }
+
+  @Override
+  public void onAddToClickListener(BookWrapper bookWrapper) {
+    selectedBook = bookWrapper;
+    modalBottomSheet = new AddToModalBottomSheet();
+    modalBottomSheet.setItemSelectedListener(this);
+    modalBottomSheet.show(getSupportFragmentManager(), "search_modal");
+  }
+
+  @Override
+  public void OnModalItemSelected(String selectedItem) {
+
+    Log.d(TAG, "OnModalItemSelected() called with: selectedItem = [" + selectedItem +
+        "] bookTitle =["+selectedBook.getBook().getTitle()+"]");
+    modalBottomSheet.dismiss();
+    selectedBook = null;
   }
 }

@@ -3,5 +3,11 @@
     <color name="colorPrimary">#005c66</color>
     <color name="colorPrimaryDark">@color/colorPrimary</color>
     <color name="colorAccent">#ff7871</color>
+
     <color name="dark_grey">#bdbdbd</color>
+    <color name="light_gray">#89000000</color>
+    <color name="light_black">#DD000000</color>
+
+    <color name="bottom_sheet_title_color">@color/light_gray</color>
+    <color name="bottom_sheet_text_color">@color/light_black</color>
 </resources>
