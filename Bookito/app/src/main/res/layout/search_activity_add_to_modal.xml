@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/SearchModalButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/search_activity_add_to"
+        android:textColor="@color/bottom_sheet_title_color"/>
+
+    <TextView
+        style="@style/SearchModalButton"
+        android:id="@+id/btn_wishlist"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/search_activity_wishlist" />
+
+    <TextView
+        style="@style/SearchModalButton"
+        android:id="@+id/btn_my_books"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/search_activity_my_books"/>
+
+
+</LinearLayout>
