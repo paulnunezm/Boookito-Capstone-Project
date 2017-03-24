@@ -1,10 +1,5 @@
 package com.nunez.bookito.searchBooks;
 
-import android.support.test.rule.ActivityTestRule;
-
-import com.nunez.bookito.ScrollingActivity;
-
-import org.junit.Rule;
 import org.junit.Test;
 
 import io.appflate.restmock.RESTMockServer;
@@ -17,8 +12,8 @@ import static io.appflate.restmock.utils.RequestMatchers.pathStartsWith;
  */
 public class SearchInteractorTest {
 
-  @Rule
-  ActivityTestRule<ScrollingActivity> activityTestRule = new ActivityTestRule<ScrollingActivity>(ScrollingActivity.class, true, false);
+//  @Rule
+//  ActivityTestRule<ScrollingActivity> activityTestRule = new ActivityTestRule<ScrollingActivity>(ScrollingActivity.class, true, false);
 
   @Test
   public void shouldPass_SearchRequestAndXmlParsing(){

@@ -16,7 +16,7 @@ public class Book {
   @Element(name = "title")
   private String title;
 
-  @Element(name = "author")
+  @Element(name = "author", required = false)
   private Author author;
 
   @Element(name = "image_url")

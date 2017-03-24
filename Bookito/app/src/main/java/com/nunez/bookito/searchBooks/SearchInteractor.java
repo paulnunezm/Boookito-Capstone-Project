@@ -22,8 +22,10 @@ import static android.content.ContentValues.TAG;
  */
 
 public class SearchInteractor implements SearchBooksContract.Interactor {
-  private SearchPresenter presenter;
-  private BookitoApp      app;
+  private SearchPresenter        presenter;
+  private BookitoApp             app;
+  private ArrayList<BookWrapper> books;
+
 
   public SearchInteractor(Application app) {
     this.app = (BookitoApp) app;
@@ -31,6 +33,8 @@ public class SearchInteractor implements SearchBooksContract.Interactor {
 
   @Override
   public void searchBooks(String bookTitle) {
+    Log.i(TAG, "searchBooks: " + bookTitle);
+
 
     GoodreadsService goodreadsService =
         app.getRetrofitClient(app.getGoodreadsBaseUrl())
@@ -41,7 +45,8 @@ public class SearchInteractor implements SearchBooksContract.Interactor {
           @Override
           public void onResponse(Call<GoodreadsResponse> call, Response<GoodreadsResponse> response) {
             if (response.isSuccessful()) {
-              ArrayList<BookWrapper> books = response.body()
+              Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+              books = response.body()
                   .getSearch()
                   .getResults()
                   .getBookWrappers();
@@ -49,14 +54,18 @@ public class SearchInteractor implements SearchBooksContract.Interactor {
               sendBooksToPresenter(books);
 
             } else {
+              Log.d(TAG, "onResponse: not successfull");
               int statusCode = response.code();
               new RuntimeException(String.valueOf(response.code()));
+
+              sendBooksToPresenter(null);
             }
           }
 
           @Override
           public void onFailure(Call<GoodreadsResponse> call, Throwable t) {
-            new RuntimeException(t.getMessage());
+            new RuntimeException(t.getMessage()).printStackTrace();
+            sendBooksToPresenter(books);
           }
         });
   }
