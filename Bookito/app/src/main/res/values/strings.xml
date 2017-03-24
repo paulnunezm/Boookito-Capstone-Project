@@ -94,5 +94,8 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="main_activity_wishlist">Wishlist</string>
     <string name="main_activity_my_books">My books</string>
+
     <string name="title_activity_search">Search</string>
+
+    <string name="search_activity_item_action">add to</string>
 </resources>
