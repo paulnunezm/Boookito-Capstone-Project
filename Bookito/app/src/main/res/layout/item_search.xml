@@ -4,23 +4,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="12dp">
 
     <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
-        android:layout_height="180dp"
+        android:layout_height="205dp"
         android:layout_marginTop="25dp"
-        android:padding="0dp"
-        android:paddingTop="18dp"
-        android:paddingLeft="158dp"
-        android:paddingStart="158dp"
-        app:cardCornerRadius="4dp">
+        app:cardCornerRadius="4dp"
+        android:elevation="2dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingLeft="158dp">
+            android:paddingTop="12dp"
+            android:paddingLeft="166dp"
+            android:paddingStart="166dp"
+            android:paddingRight="12dp" >
 
             <TextView
                 android:id="@+id/title"
@@ -41,12 +42,12 @@
                 tools:text="Jose Saramago"/>
 
             <android.support.v7.widget.AppCompatRatingBar
+                style="@style/BookitoStarts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:isIndicator="true"
                 android:numStars="5"
                 android:stepSize="0.1"
-                style="@android:style/Widget.Material.RatingBar.Indicator"
                 tools:rating="4.07"/>
 
             <TextView
@@ -54,11 +55,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:maxLines="4"
+                android:maxLines="5"
                 android:textSize="12sp"
                 tools:text="Una ceguera blanca se expande de manera fulminante. Internados en cuarentena o perdidos por la ciudad, los ciegos deben enfrentarse a lo más primitivo de la especie humana: la voluntad de sobrevivir a cualquier precio. José Saramago, Premio Nobel de Literatura 1998, teje una aterradora parábola acerca del ser humano, que encierra lo más sublime y miserable de nosotros mismos.'Hay novelas que después de leídas continuarán iluminando túneles en la conciencia, abriendo puertas de habitaciones a las que no nos habíamos asomado pese a estar dentro de nosotros.'"/>
         </LinearLayout>
 
+        <android.support.v7.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:background="@android:color/transparent"
+            android:text="@string/search_activity_item_action"
+            android:textSize="14sp"/>
     </android.support.v7.widget.CardView>
 
 
@@ -67,8 +75,8 @@
         android:layout_width="140dp"
         android:layout_height="180dp"
         android:background="@color/dark_grey"
-        android:layout_marginLeft="9dp"
-        android:layout_marginStart="9dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
         android:elevation="2dp"/>
 
 </FrameLayout>
