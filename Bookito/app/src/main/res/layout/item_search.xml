@@ -68,7 +68,7 @@
         android:id="@+id/img_cover"
         android:layout_width="100dp"
         android:layout_height="160dp"
-        android:background="@color/dark_grey"
+        android:background="@color/gray_light"
         android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp"
         android:elevation="4dp"/>
