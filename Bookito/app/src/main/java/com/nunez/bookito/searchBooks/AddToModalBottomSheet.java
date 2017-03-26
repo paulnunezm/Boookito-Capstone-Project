@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nunez.bookito.R;
+import com.nunez.bookito.repositories.FirebaseNodes;
 
 /**
  * Created by paulnunez on 3/24/17.
@@ -35,14 +36,14 @@ public class AddToModalBottomSheet extends BottomSheetDialogFragment {
     v.findViewById(R.id.btn_wishlist).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        listener.OnModalItemSelected(getResources().getString(R.string.search_activity_wishlist));
+        listener.OnModalItemSelected(FirebaseNodes.WISHLIST);
       }
     });
 
     v.findViewById(R.id.btn_my_books).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        listener.OnModalItemSelected(getResources().getString(R.string.search_activity_my_books));
+        listener.OnModalItemSelected(FirebaseNodes.MY_BOOKS);
       }
     });
 

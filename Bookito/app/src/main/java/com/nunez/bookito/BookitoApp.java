@@ -2,6 +2,8 @@ package com.nunez.bookito;
 
 import android.app.Application;
 
+import com.nunez.bookito.repositories.FirebaseRepo;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
@@ -11,10 +13,17 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 public class BookitoApp extends Application {
 
-  private  Retrofit retrofit = null;
+  private Retrofit retrofit = null;
 
-  public  Retrofit getRetrofitClient(String baseUrl) {
-    if (retrofit==null) {
+  @Override
+  public void onCreate() {
+    super.onCreate();
+
+    new FirebaseRepo().initialize();
+  }
+
+  public Retrofit getRetrofitClient(String baseUrl) {
+    if (retrofit == null) {
       retrofit = new Retrofit.Builder()
           .baseUrl(baseUrl)
           .addConverterFactory(SimpleXmlConverterFactory.create())
@@ -23,7 +32,7 @@ public class BookitoApp extends Application {
     return retrofit;
   }
 
-  public String getGoodreadsBaseUrl(){
+  public String getGoodreadsBaseUrl() {
     return "https://www.goodreads.com";
   }
 }

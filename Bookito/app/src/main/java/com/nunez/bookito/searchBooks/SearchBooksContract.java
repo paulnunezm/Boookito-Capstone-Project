@@ -1,5 +1,6 @@
 package com.nunez.bookito.searchBooks;
 
+import com.nunez.bookito.entities.Book;
 import com.nunez.bookito.entities.BookWrapper;
 
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ public interface SearchBooksContract {
   interface Presenter {
     void searchBooks(String bookTitle);
     void loadBooks(ArrayList<BookWrapper> books);
+    void saveBookTo(Book book, String list);
+    void displayMessage(String message);
   }
 
   interface View{
@@ -21,11 +24,13 @@ public interface SearchBooksContract {
     void showLoading();
     void hideLoading();
     void onSearchTextChange(String text);
+    void displaySnackBar(String message);
   }
 
   interface Interactor {
     void searchBooks(String bookTitle) throws Exception;
     void setPresenter(SearchPresenter presenter);
     void sendBooksToPresenter(ArrayList<BookWrapper> books);
+    void saveBookTo(Book book, String nodeName);
   }
 }

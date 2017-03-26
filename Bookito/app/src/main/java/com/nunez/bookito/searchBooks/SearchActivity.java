@@ -1,6 +1,7 @@
 package com.nunez.bookito.searchBooks;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,7 +14,9 @@ import android.widget.ProgressBar;
 
 import com.nunez.bookito.R;
 import com.nunez.bookito.customViews.BookTextWatcher;
+import com.nunez.bookito.entities.Book;
 import com.nunez.bookito.entities.BookWrapper;
+import com.nunez.bookito.repositories.FirebaseRepo;
 
 import java.util.ArrayList;
 
@@ -30,7 +33,9 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
   private GridLayoutManager     gridLayoutManager;
   private SearchAdapter         adapter;
   private AddToModalBottomSheet modalBottomSheet;
-  private BookWrapper           selectedBook;
+  private Book                  selectedBook;
+  private View                  parentLayout;
+  private FirebaseRepo          firebaseRepo;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -44,17 +49,21 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
     EditText editText = (EditText) findViewById(R.id.editText);
     progress = (ProgressBar) findViewById(R.id.progress);
     recyclerView = (RecyclerView) findViewById(R.id.recycler);
+    parentLayout = findViewById(R.id.layout);
 
     int gridColumns = getResources().getInteger(R.integer.search_activity_columns);
     gridLayoutManager = new GridLayoutManager(this,
         gridColumns,
         LinearLayoutManager.VERTICAL,
         false);
+
     mTextWatcher = new BookTextWatcher(this);
     interactor = new SearchInteractor(getApplication());
     presenter = new SearchPresenter(this, interactor);
+    modalBottomSheet = new AddToModalBottomSheet();
 
     editText.addTextChangedListener(mTextWatcher);
+    modalBottomSheet.setItemSelectedListener(this);
     recyclerView.setLayoutManager(gridLayoutManager);
     recyclerView.setHasFixedSize(true);
   }
@@ -63,9 +72,7 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
   public void showBooks(ArrayList<BookWrapper> booksArray) {
     adapter = new SearchAdapter(booksArray, this);
     recyclerView.setAdapter(adapter);
-
     adapter.notifyDataSetChanged();
-
   }
 
   @Override
@@ -103,18 +110,22 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
   }
 
   @Override
+  public void displaySnackBar(String message) {
+    Snackbar.make(parentLayout, message, Snackbar.LENGTH_SHORT).show();
+  }
+
+  @Override
   public void onAddToClickListener(BookWrapper bookWrapper) {
-    selectedBook = bookWrapper;
-    modalBottomSheet = new AddToModalBottomSheet();
-    modalBottomSheet.setItemSelectedListener(this);
+    selectedBook = bookWrapper.getBook();
+    selectedBook.setAverageRating(bookWrapper.getAverageRating());
+
+
     modalBottomSheet.show(getSupportFragmentManager(), "search_modal");
   }
 
   @Override
   public void OnModalItemSelected(String selectedItem) {
-
-    Log.d(TAG, "OnModalItemSelected() called with: selectedItem = [" + selectedItem +
-        "] bookTitle =["+selectedBook.getBook().getTitle()+"]");
+    if (selectedBook != null) presenter.saveBookTo(selectedBook, selectedItem);
     modalBottomSheet.dismiss();
     selectedBook = null;
   }

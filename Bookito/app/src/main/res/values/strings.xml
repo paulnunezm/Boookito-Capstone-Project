@@ -99,6 +99,8 @@
     <string name="search_activity_add_to">Add to</string>
     <string name="search_activity_wishlist">Wishlist</string>
     <string name="search_activity_my_books">My books</string>
+    <string name="search_activity_book_saved">Your book was added to %s!</string>
+
 
     <string name="title_activity_search">Search</string>
     <string name="search_activity_item_action">Add to</string>
