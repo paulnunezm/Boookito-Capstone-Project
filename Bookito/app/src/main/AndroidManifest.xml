@@ -23,7 +23,7 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".bookLists.BookListsActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -31,11 +31,11 @@
         <activity
             android:name=".searchBooks.SearchActivity"
             android:label="@string/title_activity_search"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".bookLists.BookListsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.nunez.bookito.MainActivity"/>
+                android:value="com.nunez.bookito.bookLists.BookListsActivity"/>
         </activity>
     </application>
 

@@ -11,6 +11,7 @@ import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.ResultCodes;
 import com.google.firebase.auth.FirebaseAuth;
+import com.nunez.bookito.bookLists.BookListsActivity;
 
 import java.util.Arrays;
 
@@ -36,7 +37,7 @@ public class DispatchActivity extends AppCompatActivity {
 
     if (auth.getCurrentUser() != null) {
       // signed in
-      Intent startMainActivityIntent = new Intent(this, MainActivity.class);
+      Intent startMainActivityIntent = new Intent(this, BookListsActivity.class);
       startActivity(startMainActivityIntent);
 
     } else {
@@ -62,7 +63,7 @@ public class DispatchActivity extends AppCompatActivity {
 
       // Successfully signed in
       if (resultCode == ResultCodes.OK) {
-        Intent startMainActivityIntent = new Intent(this, MainActivity.class);
+        Intent startMainActivityIntent = new Intent(this, BookListsActivity.class);
         startActivity(startMainActivityIntent);
         finish();
         return;
