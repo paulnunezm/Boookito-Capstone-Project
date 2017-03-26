@@ -26,7 +26,11 @@ public class DispatchActivity extends AppCompatActivity {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setTheme(R.style.AppTheme_NoActionBar);
+
+    /** If this wasn't a non common dispatch activity we would change
+     * the theme with setTheme() for removing the splashScreen theme
+     * and setting the correct here.
+     */
 
     FirebaseAuth auth = FirebaseAuth.getInstance();
 

@@ -10,7 +10,7 @@
 
     <style name="AppTheme.BrandedLaunch" parent="AppTheme">
         <!--Splash screen-->
-        <!--<item name="android:windowBackground">@drawable/branded_logo</item>-->
+        <item name="android:windowBackground">@drawable/splash_logo</item>
     </style>
 
 
