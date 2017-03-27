@@ -14,6 +14,6 @@ public class FirebaseNodes {
   @Retention(RetentionPolicy.CLASS)
   @StringDef({WISHLIST, MY_BOOKS})
   public@interface BOOK_LISTS{}
-  public static final String WISHLIST = "whislist";
+  public static final String WISHLIST = "wishlist";
   public static final String MY_BOOKS = "myBooks";
 }
