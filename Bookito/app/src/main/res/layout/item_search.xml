@@ -11,8 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="170dp"
         android:layout_marginTop="25dp"
-        app:cardCornerRadius="4dp"
-        android:elevation="2dp">
+        app:cardCornerRadius="2dp"
+        android:elevation="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,6 +71,6 @@
         android:background="@color/gray_light"
         android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp"
-        android:elevation="4dp"/>
+        android:elevation="6dp"/>
 
 </FrameLayout>
