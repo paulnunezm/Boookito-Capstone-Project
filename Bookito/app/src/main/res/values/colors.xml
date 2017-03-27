@@ -9,6 +9,7 @@
     <!--<color name="colorAccent">#6E7783</color>-->
 
     <color name="red">#ef5555</color>
+    <color name="brown_mega_light">#e6e3dd</color>
     <color name="gray_light">#bdbdbd</color>
     <color name="gray_dark">#89000000</color>
     <color name="black">#DD000000</color>
