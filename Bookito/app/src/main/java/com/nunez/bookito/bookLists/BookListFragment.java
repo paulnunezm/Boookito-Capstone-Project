@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.nunez.bookito.R;
+import com.nunez.bookito.entities.Book;
 import com.nunez.bookito.entities.BookWrapper;
 import com.nunez.bookito.repositories.FirebaseNodes;
 
@@ -24,7 +25,7 @@ import java.util.ArrayList;
  * Created by paulnunez on 3/26/17.
  */
 
-public class BookListFragment extends Fragment implements BookListContract.View, BookListAdapter.onShowListListerner {
+public class BookListFragment extends Fragment implements BookListContract.View, BookListAdapter.onShowListListerner, BookListViewHolder.BookListItemListener {
   /**
    * This fragment present a list of the selected book list.
    */
@@ -39,6 +40,7 @@ public class BookListFragment extends Fragment implements BookListContract.View,
   private GridLayoutManager       layoutManager;
   private View                    layout;
   private ProgressBar             progressBar;
+  private BookListsModalBottomSheet modalBottomSheet;
   private boolean  isListShowed;
 
   public BookListFragment() {
@@ -75,7 +77,8 @@ public class BookListFragment extends Fragment implements BookListContract.View,
     interactor = new BookListInteractor(getActivity().getApplication());
     presenter = new BookListPresenter(this, interactor);
 
-    layoutManager = new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.search_activity_columns));
+    modalBottomSheet = BookListsModalBottomSheet.newInstace(getArguments().getString(ARG_LIST_NAME));
+    layoutManager = new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.book_list_fragment_columns));
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setHasFixedSize(true);
     presenter.getBookFromList(getArguments().getString(ARG_LIST_NAME));
@@ -123,7 +126,7 @@ public class BookListFragment extends Fragment implements BookListContract.View,
 
   @Override
   public void setupRecyclerViewWithReference(DatabaseReference bookListRef) {
-    adapter = new BookListAdapter(bookListRef, this);
+    adapter = new BookListAdapter(bookListRef, this, this);
     recyclerView.setAdapter(adapter);
   }
 
@@ -138,5 +141,12 @@ public class BookListFragment extends Fragment implements BookListContract.View,
       isListShowed = true;
       hideLoading();
     }
+  }
+
+  @Override
+  public void onItemClickListener(Book book) {
+
+
+    modalBottomSheet.show(getActivity().getSupportFragmentManager(), "item_modal");
   }
 }

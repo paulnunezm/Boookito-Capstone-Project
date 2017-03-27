@@ -4,14 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
-
-    <TextView
-        style="@style/ModalButton"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="@string/search_activity_add_to"
-        android:textColor="@color/bottom_sheet_title_color"/>
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
 
     <TextView
         style="@style/ModalButton"

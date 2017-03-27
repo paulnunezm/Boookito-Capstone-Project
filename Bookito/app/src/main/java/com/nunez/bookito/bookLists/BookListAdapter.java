@@ -1,6 +1,9 @@
 package com.nunez.bookito.bookLists;
 
-import android.util.Log;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -14,23 +17,32 @@ import com.nunez.bookito.entities.Book;
 class BookListAdapter extends FirebaseRecyclerAdapter<Book, BookListViewHolder> {
   private static final String TAG = "BookListAdapter";
 
+  private final DatabaseReference bookListRef;
   private final onShowListListerner listListerner;
+  private BookListViewHolder.BookListItemListener itemSelectedListener;
 
-  public interface onShowListListerner {
+  interface onShowListListerner {
     void onListShowed();
   }
 
-  /**
-   * @param bookListRef             The Firebase location to watch for data changes. Can also be a slice of a location,
-   *                        using some combination of {@code limit()}, {@code startAt()}, and {@code endAt()}.
-   */
-  public BookListAdapter(DatabaseReference bookListRef, onShowListListerner listerner) {
-    // Call the super constructor with predefined values and the received bookListRef
-    super(Book.class, R.layout.item_search, BookListViewHolder.class, bookListRef);
-    Log.d(TAG, "BookListAdapter: ");
-    this.listListerner = listerner;
-    Log.d(TAG, "BookListAdapter: ");
 
+  BookListAdapter(DatabaseReference bookListRef, onShowListListerner listerner, BookListViewHolder.BookListItemListener itemSelectedListener) {
+    // Call the super constructor with predefined values and the received bookListRef
+    super(Book.class, R.layout.item_book_on_list, BookListViewHolder.class, bookListRef);
+    this.bookListRef = bookListRef;
+    this.listListerner = listerner;
+    this.itemSelectedListener = itemSelectedListener;
+  }
+
+  @Override
+  public BookListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    // Although the FirebaseRecycler Adapter creates this by it self
+    // it is handy for us to override this method to be able to pass
+    // the context we're into and a listener. :D
+
+    Context context        = parent.getContext();
+    View    searchViewItem = LayoutInflater.from(context).inflate(R.layout.item_book_on_list, parent, false);
+    return new BookListViewHolder(searchViewItem, itemSelectedListener, context); 
   }
 
   @Override

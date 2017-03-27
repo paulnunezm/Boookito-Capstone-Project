@@ -5,6 +5,11 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
+    <!-- Lists -->
+    <string name="list_wishlist">Wishlist</string>
+    <string name="list_my_books">My books</string>
+    <!-- Lists -->
+
     <!-- Main activity -->
     <string name="main_activity_wishlist">Wishlist</string>
     <string name="main_activity_my_books">My books</string>
@@ -14,13 +19,14 @@
     <string name="search_activity_title">Search</string>
     <string name="search_activity_add_to">Add to</string>
     <string name="search_activity_item_action">Add to</string>
-    <string name="search_activity_wishlist">Wishlist</string>
-    <string name="search_activity_my_books">My books</string>
+    <string name="search_activity_wishlist">@string/list_wishlist</string>
+    <string name="search_activity_my_books">@string/list_my_books</string>
     <string name="search_activity_book_saved">Your book was added to %s!</string>
     <string name="search_activity_by_author">By %s!</string>
     <!-- Search activity -->
 
     <!-- Book list activity -->
+    <string name="book_list_activity_move_to">Move to %s</string>
     <string name="book_list_modal_delete">Delete</string>
     <!-- Book list activity -->
 
