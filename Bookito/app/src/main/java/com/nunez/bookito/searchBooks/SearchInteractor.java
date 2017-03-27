@@ -8,6 +8,7 @@ import com.nunez.bookito.R;
 import com.nunez.bookito.entities.Book;
 import com.nunez.bookito.entities.BookWrapper;
 import com.nunez.bookito.entities.GoodreadsResponse;
+import com.nunez.bookito.mvp.BaseContract;
 import com.nunez.bookito.repositories.FirebaseRepo;
 import com.nunez.bookito.repositories.GoodreadsService;
 
@@ -64,8 +65,8 @@ public class SearchInteractor implements SearchBooksContract.Interactor {
   }
 
   @Override
-  public void setPresenter(SearchPresenter presenter) {
-    this.presenter = presenter;
+  public void setPresenter(BaseContract.BasePresenter presenter) {
+    this.presenter = (SearchPresenter) presenter;
   }
 
   @Override
