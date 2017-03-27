@@ -30,7 +30,7 @@
         </activity>
         <activity
             android:name=".searchBooks.SearchActivity"
-            android:label="@string/title_activity_search"
+            android:label="@string/search_activity_title"
             android:parentActivityName=".bookLists.BookListsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

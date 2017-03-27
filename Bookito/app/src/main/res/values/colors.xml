@@ -8,6 +8,7 @@
     <!--<color name="colorPrimaryDark">#6a979b</color>-->
     <!--<color name="colorAccent">#6E7783</color>-->
 
+    <color name="red">#ef5555</color>
     <color name="gray_light">#bdbdbd</color>
     <color name="gray_dark">#89000000</color>
     <color name="black">#DD000000</color>

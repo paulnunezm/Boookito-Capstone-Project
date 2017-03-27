@@ -6,21 +6,21 @@
     android:orientation="vertical">
 
     <TextView
-        style="@style/SearchModalButton"
+        style="@style/ModalButton"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:text="@string/search_activity_add_to"
         android:textColor="@color/bottom_sheet_title_color"/>
 
     <TextView
-        style="@style/SearchModalButton"
+        style="@style/ModalButton"
         android:id="@+id/btn_wishlist"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:text="@string/search_activity_wishlist" />
 
     <TextView
-        style="@style/SearchModalButton"
+        style="@style/ModalButton"
         android:id="@+id/btn_my_books"
         android:layout_width="match_parent"
         android:layout_height="48dp"
