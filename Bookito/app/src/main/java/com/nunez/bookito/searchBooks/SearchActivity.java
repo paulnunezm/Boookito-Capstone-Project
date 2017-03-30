@@ -21,7 +21,7 @@ import com.nunez.bookito.repositories.FirebaseRepo;
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity implements SearchBooksContract.View,
-    SearchAdapter.SearchViewHolder.SearchBookListener, AddToModalBottomSheet.OnItemSelectedListener {
+    SearchAdapter.SearchViewHolder.SearchBookListener, AddToModalBottomSheet.OnModalOptionSelected {
 
   private static final String TAG = "SearchActivity";
 
@@ -124,7 +124,7 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
   }
 
   @Override
-  public void OnModalItemSelected(String selectedItem) {
+  public void onModalOptionSelected(String selectedItem) {
     if (selectedBook != null) presenter.saveBookTo(selectedBook, selectedItem);
     modalBottomSheet.dismiss();
     selectedBook = null;
