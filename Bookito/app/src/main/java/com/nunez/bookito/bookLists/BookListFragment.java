@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
  * Created by paulnunez on 3/26/17.
  */
 
-public class BookListFragment extends Fragment implements BookListContract.View, BookListAdapter.onShowListListerner, BookListViewHolder.BookListItemListener {
+public class BookListFragment extends Fragment implements BookListContract.View, BookListAdapter.onShowListListerner, BookListViewHolder.BookListItemListener, BookListsModalBottomSheet.OnModalOptionSelected {
   /**
    * This fragment present a list of the selected book list.
    */
@@ -33,15 +34,17 @@ public class BookListFragment extends Fragment implements BookListContract.View,
   private              String TAG           = "BookListFragment";
   private static final String ARG_LIST_NAME = "list_name";
 
-  private BookListPresenter       presenter;
-  private BookListInteractor      interactor;
-  private RecyclerView            recyclerView;
-  private FirebaseRecyclerAdapter adapter;
-  private GridLayoutManager       layoutManager;
-  private View                    layout;
-  private ProgressBar             progressBar;
+  private BookListPresenter         presenter;
+  private BookListInteractor        interactor;
+  private RecyclerView              recyclerView;
+  private FirebaseRecyclerAdapter   adapter;
+  private GridLayoutManager         layoutManager;
+  private FrameLayout               layout;
+  private ProgressBar               progressBar;
   private BookListsModalBottomSheet modalBottomSheet;
-  private boolean  isListShowed;
+  private Book                      selectedBook;
+  private String                    currentListName;
+  private boolean                   isListShowed;
 
   public BookListFragment() {
   }
@@ -70,18 +73,20 @@ public class BookListFragment extends Fragment implements BookListContract.View,
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View rootView = inflater.inflate(R.layout.book_lists_fragment, container, false);
 
-    layout = rootView.findViewById(R.id.layout);
+    layout = (FrameLayout) rootView.findViewById(R.id.layout);
     recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler);
     progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+
+    currentListName = getArguments().getString(ARG_LIST_NAME);
 
     interactor = new BookListInteractor(getActivity().getApplication());
     presenter = new BookListPresenter(this, interactor);
 
-    modalBottomSheet = BookListsModalBottomSheet.newInstace(getArguments().getString(ARG_LIST_NAME));
+    modalBottomSheet = BookListsModalBottomSheet.newInstace(currentListName);
     layoutManager = new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.book_list_fragment_columns));
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setHasFixedSize(true);
-    presenter.getBookFromList(getArguments().getString(ARG_LIST_NAME));
+    presenter.getBookFromList(currentListName);
 
     return rootView;
   }
@@ -121,7 +126,7 @@ public class BookListFragment extends Fragment implements BookListContract.View,
 
   @Override
   public void displaySnackBar(String message) {
-    Snackbar.make(layout, message, Snackbar.LENGTH_SHORT);
+    Snackbar.make(layout, message, Snackbar.LENGTH_SHORT).show();
   }
 
   @Override
@@ -136,8 +141,8 @@ public class BookListFragment extends Fragment implements BookListContract.View,
    */
   @Override
   public void onListShowed() {
-    if(!isListShowed){
-    Log.d(TAG, "onListShowed() called");
+    if (!isListShowed) {
+      Log.d(TAG, "onListShowed() called");
       isListShowed = true;
       hideLoading();
     }
@@ -145,8 +150,15 @@ public class BookListFragment extends Fragment implements BookListContract.View,
 
   @Override
   public void onItemClickListener(Book book) {
-
-
+    selectedBook = book;
     modalBottomSheet.show(getActivity().getSupportFragmentManager(), "item_modal");
+    modalBottomSheet.setItemSelectedListener(this);
+  }
+
+  @Override
+  public void onModalOptionSelected(String optionSelected) {
+    presenter.bookListOperation(optionSelected, currentListName, selectedBook);
+    selectedBook = null;
+    modalBottomSheet.dismiss();
   }
 }

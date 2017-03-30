@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-        <color android:color="@color/colorPrimary"/>
+        <color android:color="@color/brown_mega_light"/>
     </item>
     <item>
         <bitmap
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/bookito_logo"
+            android:alpha="0.7"
             android:tileMode="disabled"
             android:gravity="center"/>
     </item>

@@ -1,6 +1,9 @@
 package com.nunez.bookito.bookLists;
 
+import android.util.Log;
+
 import com.google.firebase.database.DatabaseReference;
+import com.nunez.bookito.entities.Book;
 import com.nunez.bookito.repositories.FirebaseNodes;
 
 /**
@@ -8,6 +11,7 @@ import com.nunez.bookito.repositories.FirebaseNodes;
  */
 
 class BookListPresenter implements BookListContract.Presenter {
+  private static final String TAG = "BookListPresenter";
 
   private final BookListContract.View view;
   private final BookListContract.Interactor interactor;
@@ -20,6 +24,7 @@ class BookListPresenter implements BookListContract.Presenter {
 
   @Override
   public void displayMessage(String message) {
+    Log.d(TAG, "displayMessage() called with: message = [" + message + "]");
     view.displaySnackBar(message);
   }
 
@@ -30,14 +35,14 @@ class BookListPresenter implements BookListContract.Presenter {
   }
 
   @Override
-  public void moveBookTo(@FirebaseNodes.BOOK_LISTS String bookListName) {
-    interactor.moveBookTo(bookListName);
+  public void bookListOperation(String option, String currentList, Book selectedBook) {
+    if(option.equals(BookListsModalBottomSheet.OPTION_DELETE)){
+      interactor.deleteBook(currentList, selectedBook);
+    }else{
+      interactor.moveBookTo(currentList, option, selectedBook);
+    }
   }
 
-  @Override
-  public void deleteBook(@FirebaseNodes.BOOK_LISTS String bookListName) {
-    interactor.deleteBook(bookListName);
-  }
 
   /**
    * Sends the builded query to the view in wich the recyclerView

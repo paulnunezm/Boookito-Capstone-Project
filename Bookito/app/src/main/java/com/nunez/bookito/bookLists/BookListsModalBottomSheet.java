@@ -3,6 +3,7 @@ package com.nunez.bookito.bookLists;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +20,23 @@ import com.nunez.bookito.repositories.FirebaseNodes;
  * as delete, list 1, list 2...
  * <p>
  * This modal have two actions one for delete and one dynamic that can be set
- * within new instance constructor and then delegate the behavior to the {@link OnItemSelectedListener}
+ * within new instance constructor and then delegate the behavior to the {@link OnModalOptionSelected}
  */
 public class BookListsModalBottomSheet extends BottomSheetDialogFragment {
+
+  private static final String TAG = "BookListsModalBottomShe";
   public static final String ARG_CURRENT_LIST = "current_list";
+  public static final String ACTION_DELETE = "delete";
+  public static final String OPTION_DELETE = "delete";
 
-  OnItemSelectedListener listener;
+  OnModalOptionSelected listener;
 
-  public interface OnItemSelectedListener {
-    void OnModalItemSelected(String selectedItem);
+  public interface OnModalOptionSelected {
+    /**
+     *
+     * @param optionSelected returns the {@value OPTION_DELETE} or the name of the list to move to.
+     */
+    void onModalOptionSelected(String optionSelected);
   }
 
   static BookListsModalBottomSheet newInstace(@FirebaseNodes.BOOK_LISTS String currentListName) {
@@ -68,21 +77,22 @@ public class BookListsModalBottomSheet extends BottomSheetDialogFragment {
     customAction.findViewById(R.id.btn_action).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        listener.OnModalItemSelected(moveToListAction);
+        listener.onModalOptionSelected(moveToListAction);
       }
     });
 
     v.findViewById(R.id.btn_delete).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        listener.OnModalItemSelected(getResources().getString(R.string.book_list_modal_delete));
+        Log.d(TAG, "DeleteViewCalled");
+        listener.onModalOptionSelected(OPTION_DELETE);
       }
     });
 
     return v;
   }
 
-  public void setItemSelectedListener(OnItemSelectedListener listener) {
+  public void setItemSelectedListener(OnModalOptionSelected listener) {
     this.listener = listener;
   }
 }

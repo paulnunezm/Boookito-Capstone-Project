@@ -9,15 +9,17 @@
         <item name="android:colorBackground">@color/brown_mega_light</item>
     </style>
 
-    <style name="AppTheme.BrandedLaunch" parent="AppTheme">
-        <!--Splash screen-->
-        <item name="android:windowBackground">@drawable/splash_logo</item>
-    </style>
-
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <!--<item name="android:windowFullscreen">true</item>-->
+        <!--<item name="android:windowContentOverlay">@null</item>-->
+    </style>
+
+    <style name="AppTheme.BrandedLaunch" parent="AppTheme.NoActionBar">
+        <!--Splash screen-->
+        <item name="android:windowBackground">@drawable/splash_logo</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>

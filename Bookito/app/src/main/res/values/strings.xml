@@ -28,13 +28,15 @@
     <!-- Book list activity -->
     <string name="book_list_activity_move_to">Move to %s</string>
     <string name="book_list_modal_delete">Delete</string>
+    <string name="book_lists_activity_msg_deleted_book">Book deleted</string>
+    <string name="book_list_activity_msg_book_moved_to">Moved to %s</string>
     <!-- Book list activity -->
 
 
     <!--=========================-->
     <!--   FIREBASE UI STRINGS   -->
     <!--=========================-->
-    <!--Showing all for translating purposes -->
+    <!-- || Showing all for translating purposes || -->
 
     <!-- Common -->
     <string name="default_toolbar_title">@string/app_name</string>

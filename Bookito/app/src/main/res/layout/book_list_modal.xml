@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:text="@string/book_list_modal_delete"
-        android:textColor="@color/red"/>
+        android:textColor="@color/red_dark"/>
 
     <TextView
         style="@style/ModalButton"

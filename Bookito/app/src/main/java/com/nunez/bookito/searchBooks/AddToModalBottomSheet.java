@@ -15,10 +15,10 @@ import com.nunez.bookito.repositories.FirebaseNodes;
  */
 
 public class AddToModalBottomSheet extends BottomSheetDialogFragment {
-  OnItemSelectedListener listener;
+  OnModalOptionSelected listener;
 
-  public interface OnItemSelectedListener{
-    void OnModalItemSelected(String selectedItem);
+  public interface OnModalOptionSelected {
+    void onModalOptionSelected(String selectedItem);
   }
 
   static AddToModalBottomSheet newInstace(){
@@ -36,21 +36,21 @@ public class AddToModalBottomSheet extends BottomSheetDialogFragment {
     v.findViewById(R.id.btn_wishlist).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        listener.OnModalItemSelected(FirebaseNodes.WISHLIST);
+        listener.onModalOptionSelected(FirebaseNodes.WISHLIST);
       }
     });
 
     v.findViewById(R.id.btn_my_books).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        listener.OnModalItemSelected(FirebaseNodes.MY_BOOKS);
+        listener.onModalOptionSelected(FirebaseNodes.MY_BOOKS);
       }
     });
 
     return v;
   }
 
-  public void setItemSelectedListener(OnItemSelectedListener listener){
+  public void setItemSelectedListener(OnModalOptionSelected listener){
     this.listener = listener;
   }
 }
