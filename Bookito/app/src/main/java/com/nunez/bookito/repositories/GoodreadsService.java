@@ -13,6 +13,8 @@ import retrofit2.http.Query;
 
 public interface GoodreadsService {
 
+  String BASE_URL = "https://www.goodreads.com";
+
   @GET("/search")
   Call<GoodreadsResponse> searchBooks(
       @Query("q") String searchString, // supports book title, author, ISBN & fields phrase searching
