@@ -3,7 +3,6 @@ package com.nunez.bookito.bookLists;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,6 +73,8 @@ public class BookListsModalBottomSheet extends BottomSheetDialogFragment {
 
     TextView customAction = (TextView) v.findViewById(R.id.btn_action);
     customAction.setText(getResources().getString(R.string.book_list_activity_move_to,moveToListTextOption));
+    customAction.setContentDescription(moveToListTextOption);
+
     customAction.findViewById(R.id.btn_action).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -84,7 +85,6 @@ public class BookListsModalBottomSheet extends BottomSheetDialogFragment {
     v.findViewById(R.id.btn_delete).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Log.d(TAG, "DeleteViewCalled");
         listener.onModalOptionSelected(OPTION_DELETE);
       }
     });

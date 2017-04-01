@@ -80,11 +80,20 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     public void setBookWrapper(final BookWrapper item) {
       this.item = item;
       Book book = item.getBook();
-      title.setText(book.getTitle());
-      author.setText(item.getBook().getAuthor().getName()); // TODO: add the by formatter
-      rating.setRating(Float.parseFloat(item.getAverageRating()));
-      Picasso.with(context).load(book.getImageUrl()).fit().into(cover);
 
+      title.setText(book.getTitle());
+      title.setContentDescription(book.getTitle());
+
+      String authorName =  item.getBook().getAuthor().getName();
+      author.setText(
+          context.getResources().getString(R.string.search_activity_by_author,
+             authorName));
+      author.setContentDescription(authorName);
+
+      rating.setRating(Float.parseFloat(item.getAverageRating()));
+      rating.setContentDescription(item.getAverageRating());
+
+      Picasso.with(context).load(book.getImageUrl()).fit().into(cover);
       addTo.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
