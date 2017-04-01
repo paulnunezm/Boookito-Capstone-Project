@@ -32,6 +32,9 @@
     <string name="book_list_activity_msg_book_moved_to">Moved to %s</string>
     <!-- Book list activity -->
 
+    <!--Accessibility-->
+    <string name="accessibility_search_activity_add_to">Add to %s</string>
+
 
     <!--=========================-->
     <!--   FIREBASE UI STRINGS   -->

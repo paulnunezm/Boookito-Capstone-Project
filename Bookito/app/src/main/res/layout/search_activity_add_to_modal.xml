@@ -3,13 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusable="true">
 
     <TextView
         style="@style/ModalButton"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:text="@string/search_activity_add_to"
+        android:contentDescription="@string/search_activity_add_to"
         android:textColor="@color/bottom_sheet_title_color"/>
 
     <TextView
@@ -17,14 +19,18 @@
         android:id="@+id/btn_wishlist"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="@string/search_activity_wishlist" />
+        android:text="@string/search_activity_wishlist"
+        android:contentDescription="@string/search_activity_wishlist"
+        android:nextFocusDown="@string/main_activity_my_books"/>
 
     <TextView
         style="@style/ModalButton"
         android:id="@+id/btn_my_books"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="@string/search_activity_my_books"/>
+        android:text="@string/search_activity_my_books"
+        android:contentDescription="@string/search_activity_my_books"
+        android:nextFocusUp="@id/btn_wishlist"/>
 
 
 </LinearLayout>

@@ -46,9 +46,16 @@ class BookListViewHolder extends RecyclerView.ViewHolder {
   void setBook(final Book listBook) {
     book = listBook;
     title.setText(book.getTitle());
+    title.setContentDescription(book.getTitle());
+
+    String authorName = book.getAuthor().getName();
     author.setText(context.getResources()
-        .getString(R.string.search_activity_by_author, book.getAuthor().getName()));
+        .getString(R.string.search_activity_by_author, authorName ));
+    author.setContentDescription(authorName);
+
     rating.setRating(Float.parseFloat(book.getAverageRating()));
+    rating.setContentDescription(book.getAverageRating());
+
     Picasso.with(context).load(book.getImageUrl()).fit().into(cover);
 
     layout.setOnClickListener(new View.OnClickListener() {
