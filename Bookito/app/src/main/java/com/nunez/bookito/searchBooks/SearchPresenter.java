@@ -1,5 +1,6 @@
 package com.nunez.bookito.searchBooks;
 
+import com.nunez.bookito.entities.Book;
 import com.nunez.bookito.entities.BookWrapper;
 
 import java.util.ArrayList;
@@ -49,5 +50,15 @@ public class SearchPresenter implements SearchBooksContract.Presenter {
       view.showNoBooksFound();
     }
 
+  }
+
+  @Override
+  public void saveBookTo(Book book, String list) {
+    interactor.saveBookTo(book, list);
+  }
+
+  @Override
+  public void displayMessage(String message) {
+    view.displaySnackBar(message);
   }
 }

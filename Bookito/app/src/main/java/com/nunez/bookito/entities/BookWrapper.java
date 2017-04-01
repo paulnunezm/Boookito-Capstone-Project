@@ -10,14 +10,14 @@ import org.simpleframework.xml.Root;
 @Root(name = "work", strict = false)
 public class BookWrapper {
 
-  @Element(name = "original_publication_year")
-  private int origialPublicationYear;
+  @Element(name = "original_publication_year", required = false)
+  public int origialPublicationYear;
 
-  @Element(name = "average_rating")
-  private String averageRating;
+  @Element(name = "average_rating", required = false)
+  public String averageRating;
 
   @Element(name = "best_book")
-  private Book book;
+  public Book book;
 
   public int getOrigialPublicationYear() {
     return origialPublicationYear;

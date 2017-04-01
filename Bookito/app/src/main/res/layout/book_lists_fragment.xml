@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
+    android:id="@+id/layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.nunez.bookito.searchBooks.SearchActivity"
-    tools:showIn="@layout/search_activity"
+    android:animateLayoutChanges="true"
+    tools:context="com.nunez.bookito.bookLists.BookListsActivity"
     android:focusable="true">
 
     <ProgressBar
-        android:id="@+id/progress"
+        android:id="@+id/progressBar"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
@@ -22,5 +20,6 @@
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:listitem="@layout/item_book_on_list"
         android:descendantFocusability="afterDescendants"/>
 </FrameLayout>

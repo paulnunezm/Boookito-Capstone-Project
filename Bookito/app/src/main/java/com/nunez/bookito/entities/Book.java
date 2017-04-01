@@ -19,6 +19,9 @@ public class Book {
   @Element(name = "author", required = false)
   private Author author;
 
+  @Element(required = false)
+  private String averageRating;
+
   @Element(name = "image_url")
   private String imageUrl;
 
@@ -68,7 +71,11 @@ public class Book {
     this.smallImageUrl = smallImageUrl;
   }
 
+  public void setAverageRating(String averageRating) {
+    this.averageRating = averageRating;
+  }
 
-
-
+  public String getAverageRating() {
+    return averageRating;
+  }
 }
