@@ -19,6 +19,7 @@ public class FirebaseRepo {
 
   public void initialize() {
     database = FirebaseDatabase.getInstance();
+    database.setPersistenceEnabled(true);
     currentUser = FirebaseAuth.getInstance().getCurrentUser();
   }
 
