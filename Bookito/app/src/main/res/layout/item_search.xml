@@ -63,7 +63,7 @@
             android:id="@+id/btn_add_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
+            android:layout_gravity="bottom|end"
             android:background="@android:color/transparent"
             android:contentDescription="@string/search_activity_add_to"
             android:text="@string/search_activity_item_action"
