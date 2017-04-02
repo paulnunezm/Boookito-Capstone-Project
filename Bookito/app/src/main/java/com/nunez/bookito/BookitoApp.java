@@ -2,6 +2,7 @@ package com.nunez.bookito;
 
 import android.app.Application;
 
+import com.google.android.gms.ads.MobileAds;
 import com.nunez.bookito.repositories.FirebaseRepo;
 
 import retrofit2.Retrofit;
@@ -19,8 +20,8 @@ public class BookitoApp extends Application {
   public void onCreate() {
     super.onCreate();
 
-//    new FirebaseRepo().initialize();
     FirebaseRepo.getInstance().setContext(this);
+    MobileAds.initialize(getApplicationContext(), "ca-app-pub-5949676227120501~8601500878");
   }
 
   public Retrofit getRetrofitClient(String baseUrl) {
