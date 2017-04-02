@@ -76,7 +76,7 @@ public class SearchInteractor implements SearchBooksContract.Interactor {
 
   @Override
   public void saveBookTo(Book book, String nodeName) {
-    FirebaseRepo.saveBook(book, nodeName);
+    FirebaseRepo.getInstance().saveBook(book, nodeName);
     presenter.displayMessage(app.getString(R.string.search_activity_book_saved, nodeName));
   }
 }
