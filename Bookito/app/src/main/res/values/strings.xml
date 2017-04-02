@@ -10,6 +10,10 @@
     <string name="list_my_books">My books</string>
     <!-- Lists -->
 
+    <!-- Preferences -->
+    <string name="pref_firebase_user_uid">current_user_id</string>
+    <!-- Preferences -->
+
     <!-- Main activity -->
     <string name="main_activity_wishlist">Wishlist</string>
     <string name="main_activity_my_books">My books</string>
@@ -32,8 +36,13 @@
     <string name="book_list_activity_msg_book_moved_to">Moved to %s</string>
     <!-- Book list activity -->
 
-    <!--Accessibility-->
+    <!-- Widget -->
+    <string name="widget_no_books_on_wishlist">There\'s no books on your Wishlit \n Good job!</string>
+    <!-- Widget -->
+
+    <!-- Accessibility -->
     <string name="accessibility_search_activity_add_to">Add to %s</string>
+    <!-- Accessibility -->
 
 
     <!--=========================-->

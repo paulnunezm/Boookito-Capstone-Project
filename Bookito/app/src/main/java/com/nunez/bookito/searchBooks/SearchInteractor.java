@@ -9,6 +9,7 @@ import com.nunez.bookito.entities.Book;
 import com.nunez.bookito.entities.BookWrapper;
 import com.nunez.bookito.entities.GoodreadsResponse;
 import com.nunez.bookito.mvp.BaseContract;
+import com.nunez.bookito.repositories.FirebaseNodes;
 import com.nunez.bookito.repositories.FirebaseRepo;
 import com.nunez.bookito.repositories.GoodreadsService;
 
@@ -77,6 +78,7 @@ public class SearchInteractor implements SearchBooksContract.Interactor {
   @Override
   public void saveBookTo(Book book, String nodeName) {
     FirebaseRepo.saveBook(book, nodeName);
+    if(nodeName.equals(FirebaseNodes.WISHLIST)) FirebaseRepo.updateWidget(app);
     presenter.displayMessage(app.getString(R.string.search_activity_book_saved, nodeName));
   }
 }

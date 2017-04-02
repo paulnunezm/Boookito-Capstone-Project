@@ -20,4 +20,7 @@
 
     <color name="bottom_sheet_title_color">@color/gray_dark</color>
     <color name="bottom_sheet_text_color">@color/black</color>
+
+    <color name="widget_background_transparent_color">#88192733</color>
+
 </resources>

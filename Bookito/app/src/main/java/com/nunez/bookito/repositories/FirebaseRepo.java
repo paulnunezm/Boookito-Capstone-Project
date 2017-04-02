@@ -1,10 +1,16 @@
 package com.nunez.bookito.repositories;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.nunez.bookito.entities.Book;
+import com.nunez.bookito.homescreenWidget.BooksWidgetProvider;
 import com.nunez.bookito.repositories.FirebaseNodes.BOOK_LISTS;
 
 /**
@@ -35,6 +41,7 @@ public class FirebaseRepo {
     DatabaseReference bookListReference = database.getReference()
         .child(currentUser.getUid())
         .child(nodeName.toLowerCase());
+//        .addValueEventListener();
 
     return bookListReference;
   }
@@ -50,5 +57,14 @@ public class FirebaseRepo {
   public static void moveBook(@BOOK_LISTS String currentList, @BOOK_LISTS String listToMoveTo, Book book) {
     deleteBook(currentList, String.valueOf(book.getId()));
     saveBook(book, listToMoveTo);
+  }
+
+  public static void updateWidget(Context context){
+    ComponentName name   = new ComponentName(context, BooksWidgetProvider.class);
+    int[]         ids    = AppWidgetManager.getInstance(context).getAppWidgetIds(name);
+    Intent        intent = new Intent(context, BooksWidgetProvider.class);
+    intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+    context.sendBroadcast(intent);
   }
 }

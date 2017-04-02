@@ -1,6 +1,7 @@
 package com.nunez.bookito;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +23,7 @@ import java.util.Arrays;
 public class DispatchActivity extends AppCompatActivity {
 
   private static final String TAG        = "DispatchActivity";
-  public static final int     RC_SIGN_IN = 25927;
+  public static final  int    RC_SIGN_IN = 25927;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,7 +36,17 @@ public class DispatchActivity extends AppCompatActivity {
 
     FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    if (auth.getCurrentUser() != null) {
+    if (auth != null && auth.getCurrentUser() != null) {
+
+      Log.i(TAG, "onCreate: currentUserId" + auth.getCurrentUser().getDisplayName() + "->" + auth.getCurrentUser().getUid());
+
+      SharedPreferences preferences = getSharedPreferences(
+          getString(R.string.pref_firebase_user_uid), 0);
+
+      SharedPreferences.Editor editor = preferences.edit();
+      editor.putString(getString(R.string.pref_firebase_user_uid), auth.getCurrentUser().getUid());
+      editor.apply();
+
       // signed in
       Intent startMainActivityIntent = new Intent(this, BookListsActivity.class);
       startActivity(startMainActivityIntent);
