@@ -19,7 +19,8 @@ public class BookitoApp extends Application {
   public void onCreate() {
     super.onCreate();
 
-    new FirebaseRepo().initialize();
+//    new FirebaseRepo().initialize();
+    FirebaseRepo.getInstance().setContext(this);
   }
 
   public Retrofit getRetrofitClient(String baseUrl) {

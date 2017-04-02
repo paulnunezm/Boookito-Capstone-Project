@@ -102,7 +102,9 @@ class BooksRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory, 
   @Override
   public RemoteViews getViewAt(int position) {
     Log.d(TAG, "getViewAt()");
-      Book book = books.get(position);
+    Book book = new Book();
+    try {
+      book = books.get(position);
 
       // Construct a remote views item based on the app widget item XML file,
       // and set the text based on the position.
@@ -127,6 +129,12 @@ class BooksRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory, 
 
       rv.setOnClickFillInIntent(R.id.widget_btn_select, fillInIntent);
       return rv;
+
+    } catch (IndexOutOfBoundsException e) {
+      Log.e(TAG, "getViewAt: ", e);
+    }
+
+    return null;
   }
 
   @Override
