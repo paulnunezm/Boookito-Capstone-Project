@@ -28,6 +28,7 @@
     <string name="search_activity_book_saved">Your book was added to %s!</string>
     <string name="search_activity_by_author">By %s!</string>
     <string name="search_activity_banner_ad_unit_id">ca-app-pub-5949676227120501/3892099675</string>
+    <string name="search_activity_msg_search_hint_">Book title, author name or ISBN</string>
     <!-- Search activity -->
 
     <!-- Book list activity -->
