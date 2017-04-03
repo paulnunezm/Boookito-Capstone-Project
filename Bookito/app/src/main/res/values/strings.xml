@@ -16,6 +16,7 @@
     <string name="main_activity_title">My lists</string>
     <string name="main_activity_wishlist">Wishlist</string>
     <string name="main_activity_my_books">My books</string>
+    <string name="main_activity_log_out">Log out</string>
     <!-- Main activity -->
 
     <!-- Search activity -->

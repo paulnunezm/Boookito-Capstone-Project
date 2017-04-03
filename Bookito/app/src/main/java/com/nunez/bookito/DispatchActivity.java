@@ -49,6 +49,8 @@ public class DispatchActivity extends AppCompatActivity {
 
       // signed in
       Intent startMainActivityIntent = new Intent(this, BookListsActivity.class);
+      startMainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
       startActivity(startMainActivityIntent);
 
     } else {
@@ -59,7 +61,7 @@ public class DispatchActivity extends AppCompatActivity {
               .setTheme(R.style.LoginTheme)
               .setProviders(Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
                   new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
-              .setLogo(R.mipmap.ic_launcher)
+              .setLogo(R.drawable.bookito_logo)
               .build(),
           RC_SIGN_IN);
     }
