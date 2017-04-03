@@ -9,14 +9,15 @@
     <!-- Lists -->
 
     <!-- Preferences -->
-    <string name="pref_firebase_user_uid">current_user_id</string>
+    <string name="pref_firebase_user_uid">current_user_
+        id</string>
     <!-- Preferences -->
 
     <!-- Main activity -->
     <string name="main_activity_title">My lists</string>
     <string name="main_activity_wishlist">Wishlist</string>
     <string name="main_activity_my_books">My books</string>
-    <string name="main_activity_log_out">Log out</string>
+    <string name="main_activity_log_out">Sign out</string>
     <!-- Main activity -->
 
     <!-- Search activity -->
