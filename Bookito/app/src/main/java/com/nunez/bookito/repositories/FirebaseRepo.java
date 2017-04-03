@@ -4,8 +4,10 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,12 +27,12 @@ public class FirebaseRepo implements ValueEventListener {
   private static final String       TAG      = "FirebaseRepo";
   private static       FirebaseRepo instance = null;
   private static FirebaseDatabase  database;
+  private static FirebaseAnalytics mFirebaseAnalytics;
   private static FirebaseUser      currentUser;
   private        Context           context;
   private        DatabaseReference savedBookRef;
   private        DatabaseReference getBookRef;
   private        DatabaseReference deletedBookRef;
-  private        DatabaseReference movedBookRef;
 
 
   public FirebaseRepo() {
@@ -44,6 +46,10 @@ public class FirebaseRepo implements ValueEventListener {
     return instance;
   }
 
+  public void setFirebaseAnalytics(FirebaseAnalytics mFirebaseAnalytics) {
+    FirebaseRepo.mFirebaseAnalytics = mFirebaseAnalytics;
+  }
+
   public void setContext(Context context) {
     this.context = context;
   }
@@ -55,6 +61,16 @@ public class FirebaseRepo implements ValueEventListener {
   }
 
   public void saveBook(Book book, String nodeName) {
+    logEvent("saved_book_to_" + nodeName, nodeName);
+    saveBookToList(book, nodeName);
+  }
+
+  private void saveBook(Book book, String nodeName, Boolean fromMoveBook){
+    logEvent("moved_book_to_" + nodeName, nodeName);
+    saveBookToList(book, nodeName);
+  }
+
+  private void saveBookToList(Book book, String nodeName) {
     savedBookRef = database.getReference()
         .child(currentUser.getUid())
         .child(nodeName.toLowerCase())
@@ -95,7 +111,7 @@ public class FirebaseRepo implements ValueEventListener {
         .child(String.valueOf(book.getId()))
         .removeValue();
 
-    saveBook(book, listToMoveTo);
+    saveBook(book, listToMoveTo, true);
   }
 
   private static void updateWidget(Context context) {
@@ -105,6 +121,12 @@ public class FirebaseRepo implements ValueEventListener {
     intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
     intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
     context.sendBroadcast(intent);
+  }
+
+  public void logEvent(String eventType, String event) {
+    Bundle bundle = new Bundle();
+    bundle.putString(eventType, event);
+    mFirebaseAnalytics.logEvent(eventType, bundle);
   }
 
   @Override

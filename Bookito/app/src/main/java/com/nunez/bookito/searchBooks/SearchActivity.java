@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.nunez.bookito.R;
 import com.nunez.bookito.customViews.BookTextWatcher;
 import com.nunez.bookito.entities.Book;
@@ -76,6 +78,13 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
     // or start a new one.
 
     getSupportLoaderManager().initLoader(25927, null, this).forceLoad();
+
+    // Prepare ad
+    AdView    mAdView   = (AdView) findViewById(R.id.adView);
+    AdRequest adRequest = new AdRequest.Builder()
+        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)        // All emulators
+        .build();
+    mAdView.loadAd(adRequest);
   }
 
   @Override

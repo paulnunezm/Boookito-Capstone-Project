@@ -37,7 +37,7 @@ public class AddToModalBottomSheet extends BottomSheetDialogFragment implements 
 
     Resources res = getContext().getResources();
 
-    container.setContentDescription(res.getString(R.string.search_activity_add_to));
+    v.findViewById(R.id.container).setContentDescription(res.getString(R.string.search_activity_add_to));
 
     View btnWishList = v.findViewById(R.id.btn_wishlist);
     View btnMyBook   = v.findViewById(R.id.btn_my_books);
