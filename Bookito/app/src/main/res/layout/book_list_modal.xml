@@ -14,8 +14,8 @@
         android:id="@+id/btn_delete"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="@string/book_list_modal_delete"
         android:contentDescription="@string/book_list_modal_delete"
+        android:text="@string/book_list_modal_delete"
         android:textColor="@color/red_dark" />
 
     <TextView
@@ -25,6 +25,5 @@
         android:layout_height="48dp"
         android:textStyle="bold"
         tools:text="@string/search_activity_my_books" />
-
 
 </LinearLayout>

@@ -2,8 +2,6 @@
     <string name="app_name">Bookito</string>
 
     <string name="action_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="section_format">Hello World from section: %1$d</string>
 
     <!-- Lists -->
     <string name="list_wishlist">Wishlist</string>
@@ -11,12 +9,15 @@
     <!-- Lists -->
 
     <!-- Preferences -->
-    <string name="pref_firebase_user_uid">current_user_id</string>
+    <string name="pref_firebase_user_uid">current_user_
+        id</string>
     <!-- Preferences -->
 
     <!-- Main activity -->
+    <string name="main_activity_title">My lists</string>
     <string name="main_activity_wishlist">Wishlist</string>
     <string name="main_activity_my_books">My books</string>
+    <string name="main_activity_log_out">Sign out</string>
     <!-- Main activity -->
 
     <!-- Search activity -->
@@ -28,6 +29,7 @@
     <string name="search_activity_book_saved">Your book was added to %s!</string>
     <string name="search_activity_by_author">By %s!</string>
     <string name="search_activity_banner_ad_unit_id">ca-app-pub-5949676227120501/3892099675</string>
+    <string name="search_activity_msg_search_hint_">Book title, author name or ISBN</string>
     <!-- Search activity -->
 
     <!-- Book list activity -->

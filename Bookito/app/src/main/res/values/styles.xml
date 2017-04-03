@@ -2,19 +2,28 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorBackground">@color/brown_mega_light</item>
-    </style>
 
+        <!--Change the normal states of unchecked checkboxes, etc.. -->
+        <item name="colorControlNormal">@color/colorPrimary</item>
+
+        <!--Overrides colorAccent on activated/checked UI controls -->
+        <!--<item name="colorControlHighlight"></item>-->
+
+        <!--Controls the ripple color-->
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+        <item name="selectableItemBackground">@drawable/clickable_background</item>
+        <item name="selectableItemBackgroundBorderless">@drawable/clickable_background</item>
+
+        <!--<item name="drawerArrowStyle">@style/Widget.AppCompat.DrawerArrowToggle</item>-->
+    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <!--<item name="android:windowFullscreen">true</item>-->
-        <!--<item name="android:windowContentOverlay">@null</item>-->
     </style>
 
     <style name="AppTheme.BrandedLaunch" parent="AppTheme.NoActionBar">
@@ -37,6 +46,7 @@
     </style>
 
     <style name="ModalButton">
+        <item name="android:background">@drawable/clickable_background</item>
         <item name="android:clickable">true</item>
         <item name="android:height">48dp</item>
         <item name="android:gravity">center_vertical</item>

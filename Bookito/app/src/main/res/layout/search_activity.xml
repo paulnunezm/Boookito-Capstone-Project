@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textAutoComplete"
+            android:hint="@string/search_activity_msg_search_hint_"
             android:textSize="20sp"
             tools:text="Dracula">
 
