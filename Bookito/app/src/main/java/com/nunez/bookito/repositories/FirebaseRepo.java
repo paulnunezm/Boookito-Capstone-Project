@@ -65,21 +65,6 @@ public class FirebaseRepo implements ValueEventListener {
     saveBookToList(book, nodeName);
   }
 
-  private void saveBook(Book book, String nodeName, Boolean fromMoveBook) {
-    logEvent("moved_book_to_" + nodeName, nodeName);
-    saveBookToList(book, nodeName);
-  }
-
-  private void saveBookToList(Book book, String nodeName) {
-    savedBookRef = database.getReference()
-        .child(currentUser.getUid())
-        .child(nodeName.toLowerCase())
-        .child(String.valueOf(book.getId()));
-
-    savedBookRef.addValueEventListener(this);
-    savedBookRef.setValue(book);
-  }
-
   public DatabaseReference getBooksFromNodeReference(@BOOK_LISTS String nodeName) {
 
     if (currentUser == null) {
@@ -119,6 +104,37 @@ public class FirebaseRepo implements ValueEventListener {
     saveBook(book, listToMoveTo, true);
   }
 
+  public void getBookFromIdInList(@BOOK_LISTS String currentList, String bookId,
+                                  final GetBookFromListListener bookListener) {
+    final DatabaseReference reference = database.getReference()
+        .child(currentUser.getUid())
+        .child(currentList)
+        .child(bookId);
+
+    final ValueEventListener valueEventListener = new ValueEventListener() {
+      @Override
+      public void onDataChange(DataSnapshot dataSnapshot) {
+        bookListener.onReceivedBook(dataSnapshot.getValue(Book.class));
+        reference.removeEventListener(this);
+      }
+
+      @Override
+      public void onCancelled(DatabaseError databaseError) {
+        bookListener.onError();
+        reference.removeEventListener(this);
+      }
+    };
+
+    reference.addValueEventListener(valueEventListener);
+
+  }
+
+  public void logEvent(String eventType, String event) {
+    Bundle bundle = new Bundle();
+    bundle.putString(eventType, event);
+    mFirebaseAnalytics.logEvent(eventType, bundle);
+  }
+
   private static void updateWidget(Context context) {
     ComponentName name   = new ComponentName(context, BooksWidgetProvider.class);
     int[]         ids    = AppWidgetManager.getInstance(context).getAppWidgetIds(name);
@@ -128,10 +144,19 @@ public class FirebaseRepo implements ValueEventListener {
     context.sendBroadcast(intent);
   }
 
-  public void logEvent(String eventType, String event) {
-    Bundle bundle = new Bundle();
-    bundle.putString(eventType, event);
-    mFirebaseAnalytics.logEvent(eventType, bundle);
+  private void saveBook(Book book, String nodeName, Boolean fromMoveBook) {
+    logEvent("moved_book_to_" + nodeName, nodeName);
+    saveBookToList(book, nodeName);
+  }
+
+  private void saveBookToList(Book book, String nodeName) {
+    savedBookRef = database.getReference()
+        .child(currentUser.getUid())
+        .child(nodeName.toLowerCase())
+        .child(String.valueOf(book.getId()));
+
+    savedBookRef.addValueEventListener(this);
+    savedBookRef.setValue(book);
   }
 
   @Override
@@ -143,5 +168,11 @@ public class FirebaseRepo implements ValueEventListener {
   @Override
   public void onCancelled(DatabaseError databaseError) {
 
+  }
+
+  public interface GetBookFromListListener {
+    void onReceivedBook(Book book);
+
+    void onError();
   }
 }

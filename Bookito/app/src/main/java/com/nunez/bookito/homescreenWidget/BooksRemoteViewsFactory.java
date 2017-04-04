@@ -109,12 +109,19 @@ class BooksRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory, 
       // Setting a fill-intent, which will be used to fill in the pending intent template
       // that is set on the collection view in Bookito provicer.
       Bundle extras = new Bundle();
-      extras.putInt(BooksWidgetProvider.CLICKED_ITEM_ACTION, position);
-      extras.putString(BooksWidgetProvider.CLICKED_ITEM_BOOK_ID, book.getTitle());
+      extras.putString(BooksWidgetProvider.CLICKED_ITEM_BOOK_ID, String.valueOf(book.getId()));
+      extras.putString(BooksWidgetProvider.CLICKED_ITEM_BOOK_TITLE, book.getTitle());
       Intent fillInIntent = new Intent();
       fillInIntent.putExtras(extras);
 
+      // Setting the action, so the widget provider can identify the event of this view
+      // being clicked.
+      fillInIntent.setAction(BooksWidgetProvider.CLICKED_ITEM_ACTION);
+
+      // Make it possible to distinguish the individual on-click
+      // action of a given item
       rv.setOnClickFillInIntent(R.id.widget_btn_select, fillInIntent);
+
       return rv;
 
     } catch (IndexOutOfBoundsException e) {
