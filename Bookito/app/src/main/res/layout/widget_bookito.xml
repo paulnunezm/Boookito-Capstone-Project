@@ -3,13 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/widget_background_transparent_color">
 
     <TextView
         android:id="@+id/widget_title"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:text="@string/list_wishlist"/>
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:paddingLeft="12dp"
+        android:paddingStart="12dp"
+        android:paddingRight="12dp"
+        android:paddingEnd="12dp"
+        android:text="@string/list_wishlist"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
     <ListView
         android:id="@+id/widget_list"
@@ -21,10 +31,10 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:gravity="center"
-              android:textColor="@color/colorAccent"
+              android:textColor="@color/white"
               android:textStyle="bold"
               android:text="@string/widget_no_books_on_wishlist"
-              android:textSize="20sp"
+              android:textSize="18sp"
               android:background="@color/widget_background_transparent_color"/>
 
 </LinearLayout>
