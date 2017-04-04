@@ -1,10 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
+
+<FrameLayout
+    android:id="@+id/no_books_indicator"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:textColor="@color/colorPrimary"
-    android:textSize="24sp"
-    tools:text="@string/no_book__message"/>
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:alpha="0.7"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/pollito"/>
+
+        <TextView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/no_books_indicator_text"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp"
+            tools:text="@string/no_book_message"/>
+    </LinearLayout>
+</FrameLayout>

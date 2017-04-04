@@ -51,6 +51,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     return bookWrappers.size();
   }
 
+  public void clear() {
+    bookWrappers = new ArrayList<BookWrapper>();
+    notifyDataSetChanged();
+  }
+
   public static class SearchViewHolder extends RecyclerView.ViewHolder {
 
     private SearchBookListener listener;
