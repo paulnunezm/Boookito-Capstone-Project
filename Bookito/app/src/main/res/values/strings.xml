@@ -40,7 +40,7 @@
     <!-- Book list activity -->
 
     <!-- Widget -->
-    <string name="widget_no_books_on_wishlist">There\'s no books on your Wishlit \n Good job!</string>
+    <string name="widget_no_books_on_wishlist">There\'s no books on your Wishlist \n Good job!</string>
     <!-- Widget -->
 
     <!-- Accessibility -->
