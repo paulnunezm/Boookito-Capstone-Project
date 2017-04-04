@@ -18,8 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:textColor="@color/colorPrimaryDark"
             android:maxLines="1"
+            android:textColor="@color/white"
             android:textSize="20sp"
             tools:text="La dama de las cameliasaaaaaaaaaaaa"/>
 
@@ -27,7 +27,7 @@
             android:id="@+id/widget_txt_author_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/widget_txt_book_title"
+            android:textColor="@color/gray_light"
             android:textSize="16sp"
             tools:text="by Alejandro Dumas"/>
     </LinearLayout>
@@ -36,8 +36,5 @@
         android:id="@+id/widget_btn_select"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
-
+        android:layout_weight="1"/>
 </LinearLayout>
