@@ -2,13 +2,13 @@ package com.nunez.bookito.homescreenWidget;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,8 +37,6 @@ class BooksRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory, 
 
   private final Context           context;
   private final Intent            intent;
-  private       String            userId;
-  private       boolean           hasUserSignedIn;
   private       DatabaseReference db;
   private ArrayList<Book> books = new ArrayList<Book>();
 
@@ -59,24 +57,13 @@ class BooksRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory, 
 
   private void getBooks() {
 
-    if (userId == null) {
-      SharedPreferences prefs = context.getSharedPreferences(
-          context.getResources().getString(R.string.pref_firebase_user_uid), 0);
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-      userId = prefs.getString(
-          context.getResources().getString(R.string.pref_firebase_user_uid), "");
-
-      hasUserSignedIn = (!userId.isEmpty());
-    }
-
-    if (!userId.isEmpty()) {
-
-//      if (db == null) {
+    if (user != null) {
       db = FirebaseDatabase.getInstance().getReference()
-          .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+          .child(user.getUid())
           .child(FirebaseNodes.WISHLIST);
       db.addValueEventListener(this);
-//      }
     }
 
     Log.d(TAG, "getBooks() size->" + books.size());
