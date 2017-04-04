@@ -65,7 +65,7 @@ public class FirebaseRepo implements ValueEventListener {
     saveBookToList(book, nodeName);
   }
 
-  private void saveBook(Book book, String nodeName, Boolean fromMoveBook){
+  private void saveBook(Book book, String nodeName, Boolean fromMoveBook) {
     logEvent("moved_book_to_" + nodeName, nodeName);
     saveBookToList(book, nodeName);
   }
@@ -81,6 +81,11 @@ public class FirebaseRepo implements ValueEventListener {
   }
 
   public DatabaseReference getBooksFromNodeReference(@BOOK_LISTS String nodeName) {
+
+    if (currentUser == null) {
+      currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    }
+
     getBookRef = database.getReference()
         .child(currentUser.getUid())
         .child(nodeName.toLowerCase());
