@@ -12,6 +12,7 @@ import org.simpleframework.xml.core.ValueRequiredException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -70,21 +71,26 @@ public class SearchedBookLoader extends android.support.v4.content.AsyncTaskLoad
       } catch (Exception e) {
         if(e instanceof IOException || e instanceof ValueRequiredException) {
           Log.e(TAG, "loadInBackground: ", e );
+          books = Collections.emptyList();
+          return books;
+
         }else{
           Log.e(TAG, "loadInBackground: another exeption ", e);
+
           e.printStackTrace();
+          books = Collections.emptyList();
+          return books;
         }
       }
       Log.d(TAG, "loadInBackground: Finished ");
+      return books;
+
     }else{
       Log.i(TAG, "loadInBackground: searchQuery empty or null");
-    }
+      return books;
 
-    if(books != null && !books.isEmpty()){
-      Log.d(TAG, "loadInBackground: Books Size"+String.valueOf(books.size()));
-      Log.d(TAG, "title: "+ books.get(0).getBook().getTitle());
     }
-    return books;
+//    return books;
   }
 
   @Override
