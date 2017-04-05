@@ -1,6 +1,12 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
 
+// Version information _ grabbed from {@url https://github.com/JakeWharton/u2020/blob/05a57bf43b9b61f16d32cbe8717af77cd608b0fb/build.gradle#L136-L140}
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+def versionBuild = 1 // Everytime a new branch is added we sum +1 to this
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -9,8 +15,8 @@ android {
         vectorDrawables.useSupportLibrary = true
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner 'com.nunez.bookito.BookitoTestRunner'
 
     }
