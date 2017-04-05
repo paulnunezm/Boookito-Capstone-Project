@@ -7,7 +7,25 @@ def versionMinor = 0
 def versionPatch = 0
 def versionBuild = 1 // Everytime a new branch is added we sum +1 to this
 
+// Create a variable called keystorePropertiesFile, and initialize it to your
+// keystore.properties file, in the rootProject folder.
+def myGradlePropertiesFile = rootProject.file("gradle.properties")
+
+// Initialize a new Properties() object called keystoreProperties.
+def myGradleProperties = new Properties()
+
+// Load your keystore.properties file into the keystoreProperties object.
+myGradleProperties.load(new FileInputStream(myGradlePropertiesFile))
+
 android {
+    signingConfigs {
+        release {
+            keyAlias myGradleProperties['KEY_ALIAS']
+            keyPassword  myGradleProperties['KEY_PASSWORD']
+            storeFile file(myGradleProperties['STORE_FILE_PATH'])
+            storePassword myGradleProperties["STORE_PASSWORD"]
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
@@ -23,13 +41,12 @@ android {
     buildTypes {
         release {
             minifyEnabled true // shrink
-            useProguard true    // obfuscate
+            useProguard false    //
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
             minifyEnabled false  // shrink
             useProguard false   // don't obfuscate
-
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -39,10 +56,6 @@ android {
     }
 }
 
-//configurations {
-//    compile.exclude group: 'stax'
-//    compile.exclude group: 'xpp3'
-//}
 
 def firebaseLibVersion = "10.2.1"
 
@@ -53,23 +66,23 @@ ext {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-
     // support
     compile "com.android.support:appcompat-v7:${supportVersion}"
     compile "com.android.support:design:${supportVersion}"
     compile "com.android.support:cardview-v7:${supportVersion}"
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
 
     // retrofit
     compile "com.squareup.retrofit2:retrofit:${retrofitVersion}"
-    compile("com.squareup.retrofit2:converter-simplexml:${retrofitVersion}") {
+    compile("com.squareup.retrofit2:converter-simplexml:${retrofitVersion}"){
         exclude module: 'stax-api'
         exclude module: 'stax'
         exclude module: 'xpp3'
     }
-
+//
     // image loading
     compile 'com.squareup.picasso:picasso:2.5.2'
-
+//
     // firebase
     compile "com.google.firebase:firebase-auth:${firebaseLibVersion}"
     compile "com.google.firebase:firebase-database:${firebaseLibVersion}"
@@ -79,11 +92,10 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-database:1.2.0' //To use the Firebase RecyclerView Adapter
 
     // test
-    androidTestCompile('com.github.andrzejchm.RESTMock:android:0.2.1', {
+    androidTestCompile('com.github.andrzejchm.RESTMock:android:0.2.1',{
         exclude group: 'com.squareup.okhttp3'
     })
     androidTestCompile "com.android.support:support-annotations:${supportVersion}"
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:2.7.17'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
