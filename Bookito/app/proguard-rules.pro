@@ -23,3 +23,38 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Workaround for ProGuard not recognizing dontobfuscate
+# https://speakerdeck.com/chalup/proguard
+-dontobfuscate
+-dontoptimize
+-optimizations !code/allocation/variable
+# END OF Workaround
+
+# FIREBASE RULES
+# Add this global rule
+-keepattributes Signature
+-keepattributes *Annotation*
+
+# This rule will properly ProGuard all the model classes in
+# the package com.yourcompany.models. Modify to fit the structure
+# of your app.
+-keepclassmembers class com.yourcompany.models.** {
+  *;
+}
+# END OF FIREBASE RULES
+
+# RETROFIT RULES
+# Platform calls Class.forName on types which do not exist on Android to determine platform.
+-dontnote retrofit2.Platform
+# Platform used when running on Java 8 VMs. Will not be used at runtime.
+-dontwarn retrofit2.Platform$Java8
+# Retain generic type information for use by reflection by converters and adapters.
+-keepattributes Signature
+# Retain declared checked exceptions for use by a Proxy instance.
+-keepattributes Exceptions
+# END OF RETROFIT RULES
+
+#PICASSO RULE
+-dontwarn com.squareup.okhttp.**
+
