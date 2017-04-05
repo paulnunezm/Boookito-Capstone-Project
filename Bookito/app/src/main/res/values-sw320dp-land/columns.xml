@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="search_book_margin">0dp</dimen>
+    <dimen name="search_book_margin">60dp</dimen>
     <integer name="search_activity_columns">1</integer>
-    <integer name="book_list_fragment_columns">2</integer>
+    <integer name="book_list_fragment_columns">3</integer>
 </resources>

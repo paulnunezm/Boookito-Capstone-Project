@@ -23,6 +23,10 @@
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingLeft="@dimen/search_book_margin"
+        ads:paddingStart="@dimen/search_book_margin"
+        android:paddingRight="@dimen/search_book_margin"
+        android:paddingEnd="@dimen/search_book_margin"
         android:descendantFocusability="afterDescendants"
         tools:listitem="@layout/item_search"/>
 
