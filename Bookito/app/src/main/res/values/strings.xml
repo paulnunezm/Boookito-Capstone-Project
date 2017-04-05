@@ -2,17 +2,23 @@
     <string name="app_name">Bookito</string>
 
     <string name="action_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="no_book_message">What are you waiting? \n go and add a book.</string>
 
     <!-- Lists -->
     <string name="list_wishlist">Wishlist</string>
     <string name="list_my_books">My books</string>
     <!-- Lists -->
 
+    <!-- Preferences -->
+    <string name="pref_firebase_user_uid">current_user_
+        id</string>
+    <!-- Preferences -->
+
     <!-- Main activity -->
+    <string name="main_activity_title">My lists</string>
     <string name="main_activity_wishlist">Wishlist</string>
     <string name="main_activity_my_books">My books</string>
+    <string name="main_activity_log_out">Sign out</string>
     <!-- Main activity -->
 
     <!-- Search activity -->
@@ -23,6 +29,11 @@
     <string name="search_activity_my_books">@string/list_my_books</string>
     <string name="search_activity_book_saved">Your book was added to %s!</string>
     <string name="search_activity_by_author">By %s!</string>
+    <string name="search_activity_banner_ad_unit_id">ca-app-pub-5949676227120501/3892099675</string>
+    <string name="search_activity_msg_search_hint_">Book title, author name or ISBN</string>
+    <string name="search_activity_no_books_message">Sorry, but we couldn\'t find any book :/</string>
+    <string name="search_activity_search_book_msg">Go and find some books :D</string>
+
     <!-- Search activity -->
 
     <!-- Book list activity -->
@@ -30,10 +41,18 @@
     <string name="book_list_modal_delete">Delete</string>
     <string name="book_lists_activity_msg_deleted_book">Book deleted</string>
     <string name="book_list_activity_msg_book_moved_to">Moved to %s</string>
+    <string name="book_list_activity_no_book_lists_message">What are you waiting? \n go and add a book.</string>
     <!-- Book list activity -->
 
-    <!--Accessibility-->
+    <!-- Widget -->
+    <string name="widget_no_books_on_wishlist">There\'s no books on your Wishlist \n Good job!</string>
+    <string name="widget_check_msg">Check</string>
+
+    <!-- Widget -->
+
+    <!-- Accessibility -->
     <string name="accessibility_search_activity_add_to">Add to %s</string>
+    <!-- Accessibility -->
 
 
     <!--=========================-->

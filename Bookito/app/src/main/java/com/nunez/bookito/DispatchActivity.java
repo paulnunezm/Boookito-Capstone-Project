@@ -22,7 +22,7 @@ import java.util.Arrays;
 public class DispatchActivity extends AppCompatActivity {
 
   private static final String TAG        = "DispatchActivity";
-  public static final int     RC_SIGN_IN = 25927;
+  public static final  int    RC_SIGN_IN = 25927;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,9 +35,13 @@ public class DispatchActivity extends AppCompatActivity {
 
     FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    if (auth.getCurrentUser() != null) {
+    if (auth != null && auth.getCurrentUser() != null) {
+
+
       // signed in
       Intent startMainActivityIntent = new Intent(this, BookListsActivity.class);
+      startMainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
       startActivity(startMainActivityIntent);
 
     } else {
@@ -48,7 +52,7 @@ public class DispatchActivity extends AppCompatActivity {
               .setTheme(R.style.LoginTheme)
               .setProviders(Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
                   new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
-              .setLogo(R.mipmap.ic_launcher)
+              .setLogo(R.drawable.bookito_logo)
               .build(),
           RC_SIGN_IN);
     }

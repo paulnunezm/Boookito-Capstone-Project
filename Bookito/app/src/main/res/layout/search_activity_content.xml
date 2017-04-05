@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.nunez.bookito.searchBooks.SearchActivity"
-    tools:showIn="@layout/search_activity"
-    android:focusable="true">
+    tools:showIn="@layout/search_activity">
 
     <ProgressBar
         android:id="@+id/progress"
@@ -22,5 +23,21 @@
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:descendantFocusability="afterDescendants"/>
+        android:paddingLeft="@dimen/search_book_margin"
+        ads:paddingStart="@dimen/search_book_margin"
+        android:paddingRight="@dimen/search_book_margin"
+        android:paddingEnd="@dimen/search_book_margin"
+        android:descendantFocusability="afterDescendants"
+        tools:listitem="@layout/item_search"/>
+
+    <include layout="@layout/no_books_screen_indicator"/>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/search_activity_banner_ad_unit_id">
+    </com.google.android.gms.ads.AdView>
 </FrameLayout>

@@ -2,6 +2,7 @@ package com.nunez.bookito.bookLists;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.nunez.bookito.DispatchActivity;
 import com.nunez.bookito.R;
 import com.nunez.bookito.repositories.FirebaseNodes;
 import com.nunez.bookito.searchBooks.SearchActivity;
@@ -70,7 +75,7 @@ public class BookListsActivity extends AppCompatActivity {
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.menu_main, menu);
+    getMenuInflater().inflate(R.menu.main_activity_menu, menu);
     return true;
   }
 
@@ -82,12 +87,23 @@ public class BookListsActivity extends AppCompatActivity {
     int id = item.getItemId();
 
     //noinspection SimplifiableIfStatement
-    if (id == R.id.action_settings) {
+    if (id == R.id.action_logout) {
+      AuthUI.getInstance()
+          .signOut(this)
+          .addOnCompleteListener(new OnCompleteListener<Void>() {
+            public void onComplete(@NonNull Task<Void> task) {
+              // user is now signed out
+              startActivity(new Intent(BookListsActivity.this, DispatchActivity.class));
+              finish();
+            }
+          });
+
       return true;
     }
 
     return super.onOptionsItemSelected(item);
   }
+
 
   /**
    * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -103,7 +119,7 @@ public class BookListsActivity extends AppCompatActivity {
     public Fragment getItem(int position) {
       // getItem is called to instantiate the fragment for the given page.
 
-      switch (position){
+      switch (position) {
         case 0:
           return BookListFragment.newInstance(FirebaseNodes.WISHLIST);
         case 1:

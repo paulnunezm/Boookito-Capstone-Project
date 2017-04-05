@@ -13,7 +13,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.nunez.bookito.R;
 import com.nunez.bookito.customViews.BookTextWatcher;
 import com.nunez.bookito.entities.Book;
@@ -41,6 +44,9 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
   private View                  parentLayout;
   private FirebaseRepo          firebaseRepo;
   private String                searchFilter;
+  private View                  mNoBooksIndicator;
+  private TextView              mNoBooksIndicatorText;
+  private boolean               mHasUserSearch;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,10 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
     progress = (ProgressBar) findViewById(R.id.progress);
     recyclerView = (RecyclerView) findViewById(R.id.recycler);
     parentLayout = findViewById(R.id.layout);
+    mNoBooksIndicator = findViewById(R.id.no_books_indicator);
+    mNoBooksIndicatorText = (TextView) findViewById(R.id.no_books_indicator_text);
+
+    mNoBooksIndicatorText.setText(getResources().getString(R.string.search_activity_search_book_msg));
 
     int gridColumns = getResources().getInteger(R.integer.search_activity_columns);
     gridLayoutManager = new GridLayoutManager(this,
@@ -74,8 +84,16 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
 
     // Prepare the loader.  Either re-connect with an existing one,
     // or start a new one.
-
     getSupportLoaderManager().initLoader(25927, null, this).forceLoad();
+
+    // Prepare ad
+    AdView mAdView = (AdView) findViewById(R.id.adView);
+    AdRequest adRequest = new AdRequest.Builder()
+        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)        // All emulators
+        .build();
+
+    // show ad
+    mAdView.loadAd(adRequest);
   }
 
   @Override
@@ -99,12 +117,14 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
   public void showLoading() {
     recyclerView.setVisibility(View.GONE);
     progress.setVisibility(View.VISIBLE);
+    mNoBooksIndicator.setVisibility(View.GONE);
   }
 
   @Override
   public void hideLoading() {
     recyclerView.setVisibility(View.VISIBLE);
     progress.setVisibility(View.GONE);
+    mNoBooksIndicator.setVisibility(View.GONE);
   }
 
 
@@ -116,12 +136,17 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
    */
   @Override
   public void onSearchTextChange(String text) {
-//    presenter.searchBooks(text);
-    Log.i(TAG, "onSearchTextChange: ");
+    //presenter.searchBooks(text);
+    //TODO: pass this logic to the SearchInteractor.
+
+    if (!mHasUserSearch) {
+      mHasUserSearch = true;
+      mNoBooksIndicatorText.setText(getResources().getString(R.string.search_activity_no_books_message));
+    }
 
     searchFilter = text;
-    // This is a hack to make the Goodreads search engine work as expected.
-    Log.d(TAG, "onSearchTextChange: "+searchFilter);
+
+    showLoading();
 
     // Make the loader perform another call and stop the previous one
     // if is still running.
@@ -159,14 +184,18 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
   @Override
   public void onLoadFinished(Loader<List<BookWrapper>> loader, List<BookWrapper> data) {
     Log.i(TAG, "onLoadFinished: Activity");
+
     if (data != null && !data.isEmpty()) {
       adapter = new SearchAdapter((ArrayList<BookWrapper>) data, SearchActivity.this);
       recyclerView.setAdapter(adapter);
-      Log.d(TAG, "onLoadFinished: Should re-populate the adapter");
+      hideLoading();
+
     } else {
-      // TODO: SHOW NO BOOKS
+      Log.d(TAG, "onLoadFinished: Else");
+      hideLoading();
+      if (adapter != null) adapter.clear();
+      mNoBooksIndicator.setVisibility(View.VISIBLE);
     }
-    hideLoading();
   }
 
   @Override
@@ -174,7 +203,6 @@ public class SearchActivity extends AppCompatActivity implements SearchBooksCont
     Log.i(TAG, "onLoaderReset: ");
     // this should clear the data in the adapter
     // but we don't want to, not at least the user
-//    showLoading();
     getSupportLoaderManager().destroyLoader(25927);
   }
 }

@@ -14,10 +14,9 @@
         android:id="@+id/btn_delete"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="@string/book_list_modal_delete"
         android:contentDescription="@string/book_list_modal_delete"
-        android:textColor="@color/red_dark"
-        android:nextFocusDown="@id/btn_action"/>
+        android:text="@string/book_list_modal_delete"
+        android:textColor="@color/red_dark" />
 
     <TextView
         style="@style/ModalButton"
@@ -25,8 +24,6 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:textStyle="bold"
-        tools:text="@string/search_activity_my_books"
-        android:nextFocusUp="@id/btn_delete"/>
-
+        tools:text="@string/search_activity_my_books" />
 
 </LinearLayout>

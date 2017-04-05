@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +27,9 @@ import java.util.ArrayList;
  * Created by paulnunez on 3/26/17.
  */
 
-public class BookListFragment extends Fragment implements BookListContract.View, BookListAdapter.onShowListListerner, BookListViewHolder.BookListItemListener, BookListsModalBottomSheet.OnModalOptionSelected {
+public class BookListFragment extends Fragment implements BookListContract.View,
+    BookListAdapter.BookListAdapterEventsListener, BookListViewHolder.BookListItemListener,
+    BookListsModalBottomSheet.OnModalOptionSelected {
   /**
    * This fragment present a list of the selected book list.
    */
@@ -44,6 +47,8 @@ public class BookListFragment extends Fragment implements BookListContract.View,
   private BookListsModalBottomSheet modalBottomSheet;
   private Book                      selectedBook;
   private String                    currentListName;
+  private View                      mNoBookIndicator;
+  private TextView                  mNoBookIndicatorText;
   private boolean                   isListShowed;
 
   public BookListFragment() {
@@ -76,8 +81,11 @@ public class BookListFragment extends Fragment implements BookListContract.View,
     layout = (FrameLayout) rootView.findViewById(R.id.layout);
     recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler);
     progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+    mNoBookIndicator = rootView.findViewById(R.id.no_books_indicator);
+    mNoBookIndicatorText = (TextView) rootView.findViewById(R.id.no_books_indicator_text);
 
     currentListName = getArguments().getString(ARG_LIST_NAME);
+    mNoBookIndicatorText.setText(getResources().getString(R.string.book_list_activity_no_book_lists_message));
 
     interactor = new BookListInteractor(getActivity().getApplication());
     presenter = new BookListPresenter(this, interactor);
@@ -86,6 +94,7 @@ public class BookListFragment extends Fragment implements BookListContract.View,
     layoutManager = new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.book_list_fragment_columns));
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setHasFixedSize(true);
+
     presenter.getBookFromList(currentListName);
 
     return rootView;
@@ -103,6 +112,9 @@ public class BookListFragment extends Fragment implements BookListContract.View,
 
   @Override
   public void showNoBooksFound() {
+    mNoBookIndicator.setVisibility(View.VISIBLE);
+    recyclerView.setVisibility(View.GONE);
+    progressBar.setVisibility(View.GONE);
   }
 
   @Override
@@ -115,6 +127,7 @@ public class BookListFragment extends Fragment implements BookListContract.View,
     Log.d(TAG, "showLoading: ");
     recyclerView.setVisibility(View.INVISIBLE);
     progressBar.setVisibility(View.VISIBLE);
+    mNoBookIndicator.setVisibility(View.GONE);
   }
 
   @Override
@@ -122,6 +135,7 @@ public class BookListFragment extends Fragment implements BookListContract.View,
     Log.d(TAG, "hideLoading: ");
     recyclerView.setVisibility(View.VISIBLE);
     progressBar.setVisibility(View.GONE);
+    mNoBookIndicator.setVisibility(View.GONE);
   }
 
   @Override
@@ -144,8 +158,20 @@ public class BookListFragment extends Fragment implements BookListContract.View,
     if (!isListShowed) {
       Log.d(TAG, "onListShowed() called");
       isListShowed = true;
-      hideLoading();
+//      hideLoading();
     }
+  }
+
+  @Override
+  public void onNoBooksInList() {
+    Log.d(TAG, "onNoBooksInList() called");
+     presenter.showNoBooksFound();
+  }
+
+  @Override
+  public void onBooksInList() {
+    Log.d(TAG, "onBooksInList() called");
+    presenter.showBooks();
   }
 
   @Override
