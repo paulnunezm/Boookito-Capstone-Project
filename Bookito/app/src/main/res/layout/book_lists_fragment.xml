@@ -22,4 +22,7 @@
         android:layout_height="match_parent"
         tools:listitem="@layout/item_book_on_list"
         android:descendantFocusability="afterDescendants"/>
+
+    <include layout="@layout/no_books_screen_indicator"/>
+
 </FrameLayout>

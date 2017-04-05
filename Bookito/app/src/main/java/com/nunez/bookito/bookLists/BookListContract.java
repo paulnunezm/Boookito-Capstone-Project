@@ -24,6 +24,10 @@ interface BookListContract {
     void bookListOperation(String option, String currentList, Book selectedBook);
 
     void SendDbReferenceToView(DatabaseReference bookListRef);
+
+    void showNoBooksFound();
+
+    void showBooks();
   }
 
   interface View extends BaseContract.BaseView {

@@ -17,16 +17,14 @@ import com.nunez.bookito.entities.Book;
 class BookListAdapter extends FirebaseRecyclerAdapter<Book, BookListViewHolder> {
   private static final String TAG = "BookListAdapter";
 
-  private final DatabaseReference bookListRef;
-  private final onShowListListerner listListerner;
-  private BookListViewHolder.BookListItemListener itemSelectedListener;
-
-  interface onShowListListerner {
-    void onListShowed();
-  }
+  private final DatabaseReference                       bookListRef;
+  private final BookListAdapterEventsListener           listListerner;
+  private       BookListViewHolder.BookListItemListener itemSelectedListener;
 
 
-  BookListAdapter(DatabaseReference bookListRef, onShowListListerner listerner, BookListViewHolder.BookListItemListener itemSelectedListener) {
+  BookListAdapter(DatabaseReference bookListRef,
+                  BookListAdapterEventsListener listerner,
+                  BookListViewHolder.BookListItemListener itemSelectedListener) {
     // Call the super constructor with predefined values and the received bookListRef
     super(Book.class, R.layout.item_book_on_list, BookListViewHolder.class, bookListRef);
     this.bookListRef = bookListRef;
@@ -50,4 +48,24 @@ class BookListAdapter extends FirebaseRecyclerAdapter<Book, BookListViewHolder> 
     viewHolder.setBook(model);
     listListerner.onListShowed();
   }
+
+  @Override
+  public int getItemCount() {
+    int count = super.getItemCount();
+
+    if (count <= 0) {
+      listListerner.onNoBooksInList();
+    }else{
+      listListerner.onBooksInList();
+    }
+
+    return count;
+  }
+
+  interface BookListAdapterEventsListener {
+    void onListShowed();
+    void onNoBooksInList();
+    void onBooksInList();
+  }
+
 }

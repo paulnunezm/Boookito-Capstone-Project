@@ -43,7 +43,6 @@ class BookListPresenter implements BookListContract.Presenter {
     }
   }
 
-
   /**
    * Sends the builded query to the view in wich the recyclerView
    * will handle this extending the {@link }
@@ -53,6 +52,16 @@ class BookListPresenter implements BookListContract.Presenter {
     //view.hideLoading();
     // the hide loading will be trigger within a callback added to the adapter;
     view.setupRecyclerViewWithReference(bookListRef);
+  }
+
+  @Override
+  public void showNoBooksFound() {
+    view.showNoBooksFound();
+  }
+
+  @Override
+  public void showBooks() {
+    view.hideLoading();
   }
 
 

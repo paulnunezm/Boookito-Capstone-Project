@@ -41,7 +41,7 @@
     <string name="book_list_modal_delete">Delete</string>
     <string name="book_lists_activity_msg_deleted_book">Book deleted</string>
     <string name="book_list_activity_msg_book_moved_to">Moved to %s</string>
-    <string name="search_activity_no_book_lists_message">What are you waiting? \n go and add a book.</string>
+    <string name="book_list_activity_no_book_lists_message">What are you waiting? \n go and add a book.</string>
     <!-- Book list activity -->
 
     <!-- Widget -->
