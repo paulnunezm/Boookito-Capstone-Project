@@ -58,3 +58,6 @@
 #PICASSO RULE
 -dontwarn com.squareup.okhttp.**
 
+# SIMPLE XML RULES
+-dontwarn javax.xml.stream.**
+
