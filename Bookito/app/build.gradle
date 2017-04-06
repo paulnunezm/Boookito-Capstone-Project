@@ -19,7 +19,7 @@ myGradleProperties.load(new FileInputStream(myGradlePropertiesFile))
 
 android {
     signingConfigs {
-        release {
+        config {
             keyAlias myGradleProperties['KEY_ALIAS']
             keyPassword  myGradleProperties['KEY_PASSWORD']
             storeFile file(myGradleProperties['STORE_FILE_PATH'])
@@ -43,6 +43,7 @@ android {
             minifyEnabled true // shrink
             useProguard false    //
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
         debug {
             minifyEnabled false  // shrink
