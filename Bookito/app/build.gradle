@@ -22,7 +22,7 @@ android {
         config {
             keyAlias myGradleProperties['KEY_ALIAS']
             keyPassword  myGradleProperties['KEY_PASSWORD']
-            storeFile file(myGradleProperties['STORE_FILE_PATH'])
+            storeFile file("$rootDir/keystore.jks")
             storePassword myGradleProperties["STORE_PASSWORD"]
         }
     }
