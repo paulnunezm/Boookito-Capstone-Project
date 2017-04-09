@@ -12,6 +12,7 @@ import android.view.View
 import com.google.android.gms.ads.AdRequest
 import com.nunez.bookito.R
 import com.nunez.bookito.customViews.BookTextWatcher
+import com.nunez.bookito.customViews.EndlessScrollListener
 import com.nunez.bookito.entities.Book
 import com.nunez.bookito.entities.BookWrapper
 import kotlinx.android.synthetic.main.no_books_screen_indicator.*
@@ -39,6 +40,7 @@ class SearchActivity : AppCompatActivity(), SearchBooksContract.View,
     private lateinit var adapter: SearchAdapter
     private var selectedBook: Book? = null
     private var mHasUserSearch: Boolean = false
+    private var isLoadingFromBottomScrollListener = false
     private var searchFilter: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,11 +66,18 @@ class SearchActivity : AppCompatActivity(), SearchBooksContract.View,
         adapter = SearchAdapter(this@SearchActivity)
         mTextWatcher = BookTextWatcher { onSearchTextChange(it) } // set listener with lambda
 
-        // set values and properties
+        // set values, properties and listeners
         no_books_indicator_text.text = resources.getString(R.string.search_activity_search_book_msg)
+        editText.addTextChangedListener(mTextWatcher)
         recycler.layoutManager = gridLayoutManager
         recycler.setHasFixedSize(true)
-        editText.addTextChangedListener(mTextWatcher)
+
+        recycler.addOnScrollListener(EndlessScrollListener {
+            if (!isLoadingFromBottomScrollListener) {
+                isLoadingFromBottomScrollListener = true
+                Log.d("SearchAtivity", "reached_bottom")
+            }
+        })
 
         // Prepare ad
         val adRequest = AdRequest.Builder()
