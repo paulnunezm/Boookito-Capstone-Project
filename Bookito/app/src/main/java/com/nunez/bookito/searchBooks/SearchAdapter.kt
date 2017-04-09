@@ -15,8 +15,9 @@ import kotlinx.android.synthetic.main.item_search.view.*
  * Created by paulnunez on 3/23/17.
  */
 
-class SearchAdapter(private var bookWrappers: ArrayList<BookWrapper>?, private val listener: SearchViewHolder.SearchBookListener) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
+class SearchAdapter(private val listener: SearchViewHolder.SearchBookListener) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     private lateinit var context: Context
+    var bookWrappers: ArrayList<BookWrapper> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         context = parent.context
@@ -26,14 +27,19 @@ class SearchAdapter(private var bookWrappers: ArrayList<BookWrapper>?, private v
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) = with(holder) {
-        setBookWrapper(bookWrappers!![position])
+        setBookWrapper(bookWrappers[position])
     }
 
-    override fun getItemCount(): Int = bookWrappers!!.size
+    override fun getItemCount(): Int = bookWrappers.size
+
+    fun addBooks(bookWrapper: ArrayList<BookWrapper>) {
+        bookWrappers.addAll(bookWrapper)
+        this.notifyDataSetChanged()
+    }
 
     fun clear() {
-        bookWrappers = ArrayList<BookWrapper>()
-        notifyDataSetChanged()
+        bookWrappers.clear()
+        this.notifyDataSetChanged()
     }
 
     class SearchViewHolder(itemView: View, private val listener: SearchViewHolder.SearchBookListener) : RecyclerView.ViewHolder(itemView) {
