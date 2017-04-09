@@ -1,5 +1,8 @@
 package com.nunez.bookito
 
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
@@ -15,4 +18,8 @@ fun TextView.setTextAndContentDescription(text: String){
 
 fun ImageView.loadImage(url: String){
     Picasso.with(this.context).load(url).fit().into(this)
+}
+
+fun ViewGroup.inflate(resource: Int): View {
+    return LayoutInflater.from(this.context).inflate(resource, this, false)
 }
