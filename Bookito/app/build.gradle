@@ -19,10 +19,10 @@ myGradleProperties.load(new FileInputStream(myGradlePropertiesFile))
 
 android {
     signingConfigs {
-        release {
+        config {
             keyAlias myGradleProperties['KEY_ALIAS']
             keyPassword  myGradleProperties['KEY_PASSWORD']
-            storeFile file(myGradleProperties['STORE_FILE_PATH'])
+            storeFile file("$rootDir/keystore.jks")
             storePassword myGradleProperties["STORE_PASSWORD"]
         }
     }
@@ -41,8 +41,9 @@ android {
     buildTypes {
         release {
             minifyEnabled true // shrink
-            useProguard false    //
+            useProguard true    //
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
         debug {
             minifyEnabled false  // shrink
