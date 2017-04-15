@@ -91,6 +91,7 @@ dependencies {
     compile "com.google.firebase:firebase-database:${firebaseLibVersion}"
     compile "com.google.firebase:firebase-ads:$firebaseLibVersion"
     compile "com.google.firebase:firebase-core:$firebaseLibVersion"
+    compile "com.google.firebase:firebase-crash:$firebaseLibVersion"
     compile 'com.firebaseui:firebase-ui-auth:1.2.0'
     compile 'com.firebaseui:firebase-ui-database:1.2.0' //To use the Firebase RecyclerView Adapter
 
