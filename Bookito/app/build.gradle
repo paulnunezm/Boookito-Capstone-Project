@@ -6,8 +6,8 @@ apply plugin: 'com.jakewharton.butterknife'
 // Version information _ grabbed from {@url https://github.com/JakeWharton/u2020/blob/05a57bf43b9b61f16d32cbe8717af77cd608b0fb/build.gradle#L136-L140}
 def versionMajor = 1
 def versionMinor = 0
-def versionPatch = 0
-def versionBuild = 1 // Everytime a new branch is added we sum +1 to this
+def versionPatch = 1
+def versionBuild = 2 // Everytime a new branch is added we sum +1 to this
 
 // Create a variable called keystorePropertiesFile, and initialize it to your
 // keystore.properties file, in the rootProject folder.
@@ -43,7 +43,7 @@ android {
     buildTypes {
         release {
             minifyEnabled true // shrink
-            useProguard true    //
+            useProguard false    //
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
