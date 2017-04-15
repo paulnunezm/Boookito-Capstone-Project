@@ -15,6 +15,13 @@ public class Results{
   @ElementList(inline = true)
   private ArrayList<BookWrapper> bookWrappers;
 
+  public Results() {
+  }
+
+  public Results(ArrayList<BookWrapper> bookWrappers) {
+    this.bookWrappers = bookWrappers;
+  }
+
   public ArrayList<BookWrapper> getBookWrappers() {
     return bookWrappers;
   }

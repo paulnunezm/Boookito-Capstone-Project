@@ -15,11 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "322708563831-pguqgiqhdm7ctgv4o8u22fkb0aajvd5h.apps.googleusercontent.com",
+          "client_id": "322708563831-26utn2dv4ducrbr0hfoqiodod2r4agnr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.nunez.bookito",
             "certificate_hash": "06db981aceb50dcb81b63964d1447ead287a09c7"
+          }
+        },
+        {
+          "client_id": "322708563831-8tegl7kgh77pk8f24kp5t93t6q0io2nt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nunez.bookito",
+            "certificate_hash": "75a57324e44c69bcc165d58d432cdfef25061cb7"
           }
         },
         {

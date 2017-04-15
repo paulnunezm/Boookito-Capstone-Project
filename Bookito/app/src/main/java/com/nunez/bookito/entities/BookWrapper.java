@@ -19,6 +19,9 @@ public class BookWrapper {
   @Element(name = "best_book")
   public Book book;
 
+  public BookWrapper() {
+  }
+
   public int getOrigialPublicationYear() {
     return origialPublicationYear;
   }
