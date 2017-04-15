@@ -98,7 +98,7 @@ public class DispatchActivity extends AppCompatActivity {
       new Handler().postDelayed(new Runnable() {
         @Override
         public void run() {
-          goToLoginActivity();
+          finish(); // TODO: CHANGE THIS
         }
       }, Snackbar.LENGTH_SHORT);
 
