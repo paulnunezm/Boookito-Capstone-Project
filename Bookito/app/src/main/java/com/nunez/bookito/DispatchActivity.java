@@ -26,6 +26,7 @@ public class DispatchActivity extends AppCompatActivity {
 
   public static final  int    RC_SIGN_IN = 25927;
   private static final String TAG        = "DispatchActivity";
+  boolean errorShown = false;
   private View container;
 
   @Override
@@ -59,8 +60,6 @@ public class DispatchActivity extends AppCompatActivity {
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-
-    boolean errorShown = false;
 
     if (requestCode == RC_SIGN_IN) {
 
@@ -107,10 +106,13 @@ public class DispatchActivity extends AppCompatActivity {
   }
 
   private void showErrorMessage(String message) {
+    errorShown = true;
     Snackbar.make(container, message, Snackbar.LENGTH_SHORT).show();
   }
 
   private void goToLoginActivity() {
+    errorShown = false;
+
     startActivityForResult(
         AuthUI.getInstance()
             .createSignInIntentBuilder()
