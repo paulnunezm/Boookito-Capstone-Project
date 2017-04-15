@@ -3,7 +3,7 @@
 /.idea/workspace.xml
 /.idea/libraries
 .idea
-.DS_Store
+*.DS_Store
 /build
 /captures
 .externalNativeBuild
