@@ -34,7 +34,7 @@ class SearchActivity : AppCompatActivity(), SearchBooksContract.View,
     // Lazy delegated vars get initialize when needed
     private val modalBottomSheet: AddToModalBottomSheet by lazy { AddToModalBottomSheet() }
 
-    private lateinit var presenter: SearchPresenter
+    private lateinit var presenter: SearchBooksContract.Presenter
     private lateinit var interactor: SearchInteractor
     private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var adapter: SearchAdapter
