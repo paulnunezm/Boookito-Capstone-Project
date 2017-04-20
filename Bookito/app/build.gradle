@@ -48,8 +48,8 @@ android {
             signingConfig signingConfigs.config
         }
         debug {
-            minifyEnabled false  // shrink
-            useProguard false   // don't obfuscate
+            minifyEnabled true  // shrink
+            useProguard true   // don't obfuscate
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
