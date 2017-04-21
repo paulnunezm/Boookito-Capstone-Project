@@ -19,7 +19,7 @@ public class Author {
   public Author() {
   }
 
-  public Author(int id, String name) {
+  public Author(@Element(name = "id") int id, @Element(name = "name") String name) {
     this.id = id;
     this.name = name;
   }
