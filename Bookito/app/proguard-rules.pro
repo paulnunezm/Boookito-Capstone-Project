@@ -68,3 +68,6 @@
     @org.simpleframework.xml.* <init>(...);
 }
 
+# Keep entities
+-keep public class com.nunez.bookito.entities.*
+
