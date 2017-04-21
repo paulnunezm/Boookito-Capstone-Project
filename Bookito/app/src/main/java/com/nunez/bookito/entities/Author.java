@@ -16,6 +16,14 @@ public class Author {
   @Element(name = "name")
   public String name;
 
+  public Author() {
+  }
+
+  public Author(@Element(name = "id") int id, @Element(name = "name") String name) {
+    this.id = id;
+    this.name = name;
+  }
+
   public int getId() {
     return id;
   }

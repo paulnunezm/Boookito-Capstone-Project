@@ -1,11 +1,13 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.jakewharton.butterknife'
 
 // Version information _ grabbed from {@url https://github.com/JakeWharton/u2020/blob/05a57bf43b9b61f16d32cbe8717af77cd608b0fb/build.gradle#L136-L140}
 def versionMajor = 1
 def versionMinor = 0
-def versionPatch = 1
-def versionBuild = 2 // Everytime a new branch is added we sum +1 to this
+def versionPatch = 3
+def versionBuild = 5 // Everytime a new branch is added we sum +1 to this
 
 // Create a variable called keystorePropertiesFile, and initialize it to your
 // keystore.properties file, in the rootProject folder.
@@ -41,13 +43,13 @@ android {
     buildTypes {
         release {
             minifyEnabled true // shrink
-            useProguard false    //
+            useProguard true    //
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
         debug {
-            minifyEnabled false  // shrink
-            useProguard false   // don't obfuscate
+            minifyEnabled true  // shrink
+            useProguard true   // don't obfuscate
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -89,6 +91,8 @@ dependencies {
     compile "com.google.firebase:firebase-database:${firebaseLibVersion}"
     compile "com.google.firebase:firebase-ads:$firebaseLibVersion"
     compile "com.google.firebase:firebase-core:$firebaseLibVersion"
+    compile "com.google.firebase:firebase-crash:$firebaseLibVersion"
+    compile 'com.google.android.gms:play-services-auth:10.2.1'
     compile 'com.firebaseui:firebase-ui-auth:1.2.0'
     compile 'com.firebaseui:firebase-ui-database:1.2.0' //To use the Firebase RecyclerView Adapter
 
@@ -100,6 +104,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:2.7.17'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
+
+repositories {
+    mavenCentral()
 }
 
 apply plugin: 'com.google.gms.google-services'

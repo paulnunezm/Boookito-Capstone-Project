@@ -31,6 +31,15 @@ public class Book {
   public Book() {
   }
 
+  public Book(int id, String title, Author author, String averageRating, String imageUrl, String smallImageUrl) {
+    this.id = id;
+    this.title = title;
+    this.author = author;
+    this.averageRating = averageRating;
+    this.imageUrl = imageUrl;
+    this.smallImageUrl = smallImageUrl;
+  }
+
   public int getId() {
     return id;
   }
@@ -71,11 +80,11 @@ public class Book {
     this.smallImageUrl = smallImageUrl;
   }
 
-  public void setAverageRating(String averageRating) {
-    this.averageRating = averageRating;
-  }
-
   public String getAverageRating() {
     return averageRating;
+  }
+
+  public void setAverageRating(String averageRating) {
+    this.averageRating = averageRating;
   }
 }

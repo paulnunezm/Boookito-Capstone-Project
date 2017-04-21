@@ -22,6 +22,16 @@ public class Search{
   @Element(name = "results")
   private Results results;
 
+  public Search() {
+  }
+
+  public Search(int resultsStart, int resultsEnd, int resultsTotal, Results results) {
+    this.resultsStart = resultsStart;
+    this.resultsEnd = resultsEnd;
+    this.resultsTotal = resultsTotal;
+    this.results = results;
+  }
+
   public int getResultsStart() {
     return resultsStart;
   }
