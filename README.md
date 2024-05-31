@@ -6,7 +6,7 @@ Bookito is an Android personal books library organizer in which I've used the fu
 - Configured Firebase services as Realtime database, AdMob and analytics.
 
 
-####Libraries used in this project:
+## Libraries used in this project:
 - **[Retrofit](https://github.com/square/retrofit)** For making request to rest apis.
 - **[Firebase](ttps://firebase.google.com)** For the database, authentication, analytics and adMob.
 - **[Firebase-ui](https://github.com/firebase/FirebaseUI-Android)** For login view and adapters.
